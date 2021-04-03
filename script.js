@@ -78,7 +78,7 @@ const getSalaryRange = (startHour=[],startMinute=[],closingHour=[],closingMinute
             else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
             else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
         }
-        else{ console.error(`Invalid day`); }
+        else{ console.log(`Invalid day`); }
     }
 
     return salaryRangeArray;
@@ -115,7 +115,7 @@ input.addEventListener('change', function (e) {
           getEmployeesAndSchedules = employeeDataToString.split("=");
           employees = getEmployeesAndSchedules[0]; 
           schedules = getEmployeesAndSchedules[1];
-
+          console.log(employees);
           // Split days array and daily Schedule string
           workDays = schedules.split(",").toString();
           days = getPattern(workDays,DELETE_SCHEDULES).trim().split(",");
