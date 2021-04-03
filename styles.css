@@ -1,3 +1,22 @@
+*{
+    margin: 0px;
+    
+}
+
+body{
+    background: #F0F8FF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    text-align:center;
+    color: white;
+    background: #3B7A57;
+    padding-top: 15px;
+    height: 50px;
+    
+}
+
 div{
     display: flex;
     flex-direction: column;
@@ -6,5 +25,24 @@ div{
 
 textarea {
     margin-top: 15px;
-    width: 50%;
+    width: 35%;
+}
+
+h2{
+    margin-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;   
+    font-size: 25px;
+}
+
+ol{
+    margin-bottom: 0px;
+    padding-bottom: 3px;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+ul{
+    margin-left: 7px;
+    font-size: 18px;
 }

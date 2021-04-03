@@ -2,14 +2,35 @@
 <html>
   
 <head>
-    <title>Salary Calculator</title>
+    <title>ACME Salary Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
   
 <body>
+    <h1>ACME Salary Calculator</h1>
+
+    <h2>Instructions:</h2>
+    <ol>
+        <li>Create a txt file.</li>
+        <li>Add elements with the format <b>Employee=DayHH:MM-HH:MM,DayHH:MM-HH:MM,DayHH:MM-HH:MM</b> then Enter.</li>
+        <li>Click in "Choose file", pick the txt file you create and wait for the results.</li>
+    </ol>
+
+    <h2>Notes:</h2>
+
+    <ul>
+        <li>Range of hours must be between these time periods: <b>00:01-09:00</b>, <b>09:01-18:00</b>, <b>18:01-00:00</b></li>
+        <li>You can add the same day in other salary range <b>RENE=MO10:00-12:00,MO15:00-17:00</b> .</li>
+        <li>Day must be MO,TU,WE,TH,FR,SA or SU representing Monday,Tuesday,Wednesday,Thursday,Friday,Saturdary and Sunday respectively.</li>
+        <li>The order doesn't matter however is recommended to write the days of work starting from Monday and ending in Sunday.</li>
+        <li>Hours must be between 0 and 23, Minutes must be between 0 and 59.</li>
+    </ul>
+
+    <br><br>
     <div>
-        <input type="file" >
         <textarea cols="30" rows="10"></textarea>
+        <br>
+        <input type="file" >
     </div>
     
     <script src="script.js"></script>    
