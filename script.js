@@ -1,0 +1,172 @@
+//------------------------- CONSTANTS AND VARIABLES ---------------------------//
+
+const DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;
+const DELETE_DAYS = /[A-Z]/;
+const DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/
+const DELETE_START_HOUR = /\d{2}:\d{2}-/
+let input= document.querySelector('input');
+let textarea = document.querySelector('textarea');
+let employeelogdata = [];
+
+
+//--------------------------------- FUNCTIONS ---------------------------------//
+
+// get a pattern and replace it with ""
+const getPattern = (textFile = "", pattern) => {
+    return textFile.replace(new RegExp(pattern,"ig"),"");
+}
+
+// get Hour from format HH:MM
+const getHour = (textFile = "") => {
+    textFile = textFile.split(/[:,]/);
+    for (var i = 0; i < textFile.length; i++){
+        textFile.splice(i + 1, 1);
+    } 
+    return textFile.map(Number);
+}
+
+// get Minutes from format HH:MM
+const getMinutes = (textFile = "") => {
+    textFile = textFile.split(/[:,]/);
+    for(var i = 0; i < textFile.length; i++){
+        textFile.splice(i,1);
+    }
+    return textFile.map(Number);
+}
+
+// get the number of hours that an employee works
+const hourSubstraction = (closingHour = [], startHour= []) => {
+    substraction = [];
+    if(closingHour.length = startHour.length){
+        for(var i = 0 ; i< closingHour.length; i++){
+            
+            if(closingHour[i] == 0){ 
+                closingHour[i] = 24; //Change to 24 to do substraction properly
+                substraction.push(closingHour[i] - startHour[i]);
+                closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+            }
+            else{
+                substraction.push(closingHour[i] - startHour[i])
+            }
+        }
+        return substraction;
+    }
+}        
+
+// Determines which salary range employee will be paid based on day and range of hour
+const getSalaryRange = (startHour=[],startMinute=[],closingHour=[],closingMinute=[],days=[])=>{
+    salaryRangeArray = [];
+    salaryPerHour = 0;
+    
+    for (var i =0; i<days.length; i++){
+
+        const WORKWEEK = (days[i] == "MO" || days[i] == "TU" || days[i] == "WE" || days[i] == "TH" || days[i] == "FR");
+        const WEEKEND = (days[i] == "SA" || days[i] == "SU");
+
+        const ZERO_HOUR_ONE_TO_FIFTY_NINE_MIN = ((startHour[i] == 0) && (startMinute[i] >= 1 && startMinute[i] <=59));
+        const ONE_TO_SEVEN_HOUR_ZERO_TO_FIFTY_NINE_MIN = ((startHour[i] >=1 && startHour[i] <=7) && (startMinute[i] >=0 && startMinute[i] <=59));
+        const EIGHT_HOUR = ((startHour[i]==8 && startMinute[i]==0));
+        const ONE_TO_EIGHT_HOUR_ZERO_TO_FIFTY_NINE_MIN = ((closingHour[i] >=1 && closingHour[i] <=8) && (closingMinute[i] >=0 && closingMinute[i] <=59));
+        const NINE_HOUR_ZERO_MIN = ((closingHour[i] == 9) && (closingMinute[i] == 0));
+
+        const NINE_HOUR_ONE_TO_FIFTY_NINE_MIN = ((startHour[i] == 9) && (startMinute[i] >= 1 && startMinute[i] <=59));
+        const TEN_TO_SIXTEEN_HOUR_ZERO_TO_FIFTY_NINE = ((startHour[i] >=10 && startHour[i] <=16) && (startMinute[i] >=0 && startMinute[i] <=59));
+        const SEVENTEEN_HOUR = ((startHour[i]==17 && startMinute[i]==0));
+        const TEN_TO_SEVENTEEN_HOUR_ZERO_TO_FIFTY_NINE = ((closingHour[i] >=10 && closingHour[i] <=17) && (closingMinute[i] >=0 && closingMinute[i] <=59));
+        const EIGHTEEN_HOUR_ZERO_MIN = ((closingHour[i] == 18) && (closingMinute[i] == 0));
+
+        const EIGHTEEN_HOUR_ONE_TO_FIFTY_NINE_MIN_START = ((startHour[i] == 18) && (startMinute[i] >= 1 && startMinute[i] <=59));
+        const NINETEEN_TO_TWENTY_TWO_HOUR_ZERO_TO_FIFTY_NINE_START = ((startHour[i] >=19 && startHour[i] <=22) && (startMinute[i] >=0 && startMinute[i] <=59));
+        const TWENTY_THREE_HOUR = ((startHour[i]==23 && startMinute[i]==0));
+        const NINETEEN_TO_TWENTY_THREE_ZERO_TO_FIFTY_NINE_CLOSING = ((closingHour[i] >=19 && closingHour[i] <=23) && (closingMinute[i] >=0 && closingMinute[i] <=59));
+        const ZERO_HOUR_ZERO_MIN_CLOSING = ((closingHour[i] == 0 && closingMinute[i] == 0));
+
+        const ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM = ((ZERO_HOUR_ONE_TO_FIFTY_NINE_MIN || ONE_TO_SEVEN_HOUR_ZERO_TO_FIFTY_NINE_MIN || EIGHT_HOUR ) && (ONE_TO_EIGHT_HOUR_ZERO_TO_FIFTY_NINE_MIN || NINE_HOUR_ZERO_MIN));
+        const NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM = ((NINE_HOUR_ONE_TO_FIFTY_NINE_MIN || TEN_TO_SIXTEEN_HOUR_ZERO_TO_FIFTY_NINE || SEVENTEEN_HOUR ) && (TEN_TO_SEVENTEEN_HOUR_ZERO_TO_FIFTY_NINE || EIGHTEEN_HOUR_ZERO_MIN));
+        const EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM = ((EIGHTEEN_HOUR_ONE_TO_FIFTY_NINE_MIN_START || NINETEEN_TO_TWENTY_TWO_HOUR_ZERO_TO_FIFTY_NINE_START || TWENTY_THREE_HOUR) && (NINETEEN_TO_TWENTY_THREE_ZERO_TO_FIFTY_NINE_CLOSING || ZERO_HOUR_ZERO_MIN_CLOSING));
+        console.log(closingHour[i]);
+        if(WORKWEEK){
+            
+            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+            else if (NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=15); }
+            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=20); }
+        }
+        else if(WEEKEND){
+            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=30); }
+            else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
+            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+        }
+        else{ console.log(`Invalid day`); }
+    }
+
+    return salaryRangeArray;
+}
+
+// Return the salary employee will be paid bases on the difference of hours and salary range
+const getSalary = (hourDifference = [], salaryRange = []) => {
+    let sum = 0;
+    for(var i=0; i< hourDifference.length; i++){
+        sum += (hourDifference[i] * salaryRange[i]);
+    }
+    return sum;
+}
+
+
+//--------------------------------- MAIN CODE -----------------------------------//
+
+input.addEventListener('change', function (e) {
+    //console.log(input.files);
+    
+    let reader = new FileReader(); //llamar a la API Filereader
+
+    //result of the file
+    reader.onload = function () {
+      
+      // Get text from input.txt file and split in lines to obtain employee data 
+      let employeeData = reader.result.trim().split(/\n/);
+
+      for (let i=0; i< employeeData.length; i++){
+
+          //Convert to string each line of employee and schedule        
+          employeeDataToString = employeeData[i].toString(); 
+
+          // Split Employees and Schedules
+          getEmployeesAndSchedules = employeeDataToString.split("=");
+          employees = getEmployeesAndSchedules[0]; 
+          schedules = getEmployeesAndSchedules[1];
+
+          // Split days array and daily Schedule string
+          workDays = schedules.split(",").toString();
+          days = getPattern(workDays,DELETE_SCHEDULES).trim().split(",");
+          dailySchedule = getPattern(workDays,DELETE_DAYS);
+
+          //Split startHourAndMinute and closingHourAndMinute with format HH:MM
+          startHourAndMinute = getPattern(dailySchedule,DELETE_CLOSING_HOUR);
+          closingHourAndMinute = getPattern(dailySchedule,DELETE_START_HOUR);
+          
+          // Split Hour(HH) and Minute(MM) for Initial and closing Hours
+          startHour = getHour(startHourAndMinute);
+          startMinute = getMinutes(startHourAndMinute);
+          closingHour = getHour(closingHourAndMinute);
+          closingMinute = getMinutes(closingHourAndMinute);
+          
+          // Determine the salary based on salaryRange and hourDifference
+          hourDifference = hourSubstraction(closingHour, startHour);
+          console.log(hourDifference);       
+          salaryRange =  getSalaryRange(startHour,startMinute,closingHour,closingMinute,days);
+          salary = getSalary(hourDifference,salaryRange);
+
+          // Save output to employeelogdata to display in textarea
+          employeelogdata.push(`The amount to pay to employee ${employees} is ${salary} USD\n`);
+   
+      }
+      
+      textarea.value = employeelogdata.toString().replace(/,/g,"");
+    };
+     
+    
+    reader.onerror = (e) => alert(e.target.error.name);
+
+    reader.readAsText(input.files[0]);
+    
+}, false);
