@@ -6,7 +6,7 @@ const DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/
 const DELETE_START_HOUR = /\d{2}:\d{2}-/
 let input= document.querySelector('input');
 let textarea = document.querySelector('textarea');
-let employeelogdata = [];
+let employeeSalaryResult = [];
 
 
 //--------------------------------- FUNCTIONS ---------------------------------//
@@ -138,11 +138,11 @@ input.addEventListener('change', function (e) {
           salary = getSalary(hourDifference,salaryRange);
 
           // Save output to employeelogdata to display in textarea
-          employeelogdata.push(`The amount to pay to employee ${employees} is ${salary} USD\n`);
+          employeeSalaryResult.push(`The amount to pay to employee ${employees} is ${salary} USD\n`);
    
       }
       
-      textarea.value = employeelogdata.toString().replace(/,/g,"");
+      textarea.value = employeeSalaryResult.toString().replace(/,/g,"");
     };
      
     
