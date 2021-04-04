@@ -321,20 +321,56 @@ const getHour = (textFile = "") => {
 
 Returns a numeric array with the even part of the array formed after the split(/[:,]/). 
 
-Example:
+**Example:**
 
-schedules variable
+*schedules* variable
 ```
 10:50,10:00,01:00,14:00,20:00
 ```
-schedules after the split with the regex /[:,]/
+*schedules* after the split with the regex /[:,]/
 ```
 ["10", "50", "10", "00", "01", "00", "14", "00", "20", "00"]
 ```
-Array index starts in 0 and then increases. `splices` will drop the index 1,3,5,7,9 and then convert string array to number array with `map` function.
+Array index starts in 0 and then increases. `splice(i+1,1)` will drop the index 1,3,5,7,9 and then convert string array to number array with `map` function.
 ```
 [10, 10, 1, 14, 20]
 ```
 
+#### getMinutes(schedule="")
+
+```
+// get Minutes from format HH:MM
+const getMinutes = (textFile = "") => {
+    textFile = textFile.split(/[:,]/);
+    for(var i = 0; i < textFile.length; i++){
+        textFile.splice(i,1);
+    }
+    //elimina la parte par
+    return textFile.map(Number);
+}
+```
+
+**Parameters**
+
+`schedules` This is the string to be manipulated. Has the form of HH:MM,HH:MM,HH:MM,HH:MM 
+
+**Return value**
+
+Returns a numeric array with the odd part of the array formed after the split(/[:,]/). 
+
+**Example:**
+
+*schedules* variable
+```
+10:50,10:00,01:00,14:00,20:00
+```
+*schedules* after the split with the regex /[:,]/
+```
+["10", "50", "10", "00", "01", "00", "14", "00", "20", "00"]
+```
+Array index starts in 0 and then increases. `splice(i,1)` will drop the index 0,2,4,6,8 and then convert string array to number array with `map` function.
+```
+[50, 0, 0, 0, 0]
+```
 
 
