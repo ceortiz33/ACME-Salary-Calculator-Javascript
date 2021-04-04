@@ -67,7 +67,38 @@ Don’t forget to include a README.md file. Your README should include an overvi
 
 I used `FileReader()` API to read the content of the textfile. This file contains the data of the employee and their schedules.
 
-The first thing to do is to get the content of the text file in a variable. The variable reader uses the property `onload` of FileReader
+The first thing to do is to get the content of the text file in a variable. The variable reader uses the property `onload` of FileReader lo siguiente que hay que hacer es obtener un array donde cada elemento represente a un empleado con su respectivo horario,
+usamos split para esto.
+
+A continuacion realizamos un bucle for para recorrer cada elemento del array, dentro de ese array tenemos que separar cada campo de la cadena, aqui aprovechandose de expresiones regulares. La cadena tiene un igual que separa dos campos empleados y los horarios, se hace un split nuevamente y almacenamos cada el primer campo en el array employees y el segundo array en schedules.
+
+Dejamos de lado por un momento el array employees y nos concentramos en el array schedules. Como siguiente paso hay que obtener el dia y el array de horarios esto lo hacemos usando expresiones regulares. days se obtiene aplicando la funcion  getPattern que toma como parametro una cadena y un patron y lo reemplaza por espacio vacio. Tambien aplicamos un trim() para evitar que posibles caracteres como espacios se tomen en consideracion en el array days.
+
+## String Employees
+Este string se produce luego del `split('=')` donde el primer elemento del array se almacena en la variable employees.
+
+La operacion se hace en un bucle for por tanto este valor cambio por cada iteracion.
+
+Primera Iteracion:  employees = RENE
+Segunda Iteracion:  employees = ASTRID
+Tercera Iteracion:  employees = CHRIS
+Cuarta Iteracion:   employees = KATHY
+Quinta Iteracion:   employees = RODRIGO
+Sexta Iteracion:    employees = ELENA
+
+## String schedules
+Este array se produce luego del `split('=')` dando como resultado dos elementos, el segundo elemento corresponde a los horarios.
+
+## Modifying Schedules Array
+
+Sched
+
+
+
+
+
+
+
 
 
 
