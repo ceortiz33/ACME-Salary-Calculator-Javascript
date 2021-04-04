@@ -132,7 +132,7 @@ Sixth  Iteration:  schedules = MO05:00-07:00,TU10:00-12:00,SA14:00-18:00,TH10:00
 
 #### days (String Array)
 
-Taking advantage of string schedule, we can apply regex to filter patterns. The function `getPattern()` take two parameters an string and a pattern and then erase that pattern The pattern used is `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` after erasing this pattern the result are the days separated by commas MO,TU,TH,SA,SU and then we split based on commas to convert it to array Luego lo convertimos a array usando un split(',')
+A String is obtained making use of the function `getPattern()` that take two parameters an *string* and a *regex pattern*. `getPattern()` erase the pattern and replaced it with `""`. The pattern used is `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` ,the result is a *string* of days separated by commas `MO,TU,TH,SA,SU` , the string is split by *commas* and then days variable becomes an **array**.
 
 ```
 First  Iteration:  days = ["MO", "TU", "TH", "SA", "SU"]
@@ -143,9 +143,9 @@ Fifth  Iteration:  days = ["MO", "WE", "FR"]
 Sixth  Iteration:  days = ["MO", "TU", "SA", "TH", "SU"]
 ```
 
-## dailySchedule 
+#### dailySchedule (String)
 
-Esta variable almacena un string donde se elimina los dias MO,TU,WE,TH,FR,SA,SU  usando la funcion getPattern y la expresion regular `DELETE_DAYS = /[A-Z]/;` que basicamente filtra todas las letras mayusculas.
+This variable is obtained using `getPattern()` with a *string* and the *regex pattern* `DELETE_DAYS = /[A-Z]/;`. This function will erase all days (MO,TU,WE,TH,FR,SA,SU) of the string and just keep the daily schedules. `getPattern()` returns an **string**.
 
 ```
 First  Iteration:  dailySchedule = 10:00-12:00,10:00-12:00,01:00-03:00,14:00-18:00,20:00-21:00
