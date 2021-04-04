@@ -71,7 +71,26 @@ I used Javascript because of the many methods that have to manage strings and ar
 
 First I need to separate each user and their respective schedules so I used a split('\n') and trim() to avoid get caught for errors if users leave a space after the text of each line. Then I used a for loop to manage each line obtained of the previous split in this text file there are six input of employees and their schedules, so this loop will execute six iterations.
 
-Now, to get the name of the employee and the schedules for separate pieces I used `split('=')`. This will genereate an array of two values per iteration, the first value is saved in `employees` and the second in `schedules`.
+Now, to get the name of the employee and the schedules for separate pieces I used `split('=')`. This will genereate an array of two values per iteration, the first value is saved in `employees` and the second in `schedules`. The variable `employees` will not be used until the end for the final message, the variable of interest for the next steps will be `schedules`.
+
+Next, I used regular expresions to obtain specific variables. The variable `days`is obtained removing the schedules with `getPattern()` function and the regex `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;`, `days` is used on future steps to analyze the amount will be paid for interval of schedule and work in `workWeek` and `weekends`.The variable `dailySchedule` is `schedules` without the days, this is important because I want to remove capital letters and then manipulate only the schedule ranges.
+
+The variable `startHourAndMinute` use `getPattern()` and the regex `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` this will obtain the first part of schedule range, in other words I obtained the value before `-`. This variable is used with the objective to obtain `startHour` and `startMinute`
+
+The variable `closingHourAndMinute` use `getPattern()` and the regex `DELETE_START_HOUR = /\d{2}:\d{2}-/` thiw will obtain the second part of schedule range, in other words I obtained the value after `-`. This variable is used with the objective to obtain `closingHour` and `closingMinute`
+
+The variables `startHour`, `startMinute`, `closingHour`, `closingMinute` are numeric arrays used for mathematics operations and the salary range operation, with the values of `closingHour` and `startHour` I can determine the difference of hours `hourDifference`.
+
+The `getSalaryRange()` function receives five parameters `startHour`, `startMinute`, `closingHour`, `closingMinute` and `days`, days is compared with const `workWeek` that compares if the value of days[i] is equals to `MO || TU || WE || TH ||FR` and with const `weekEnd` if is equals to `SA || SU`. The schedule range are the same for both const only change the salary paid for that range.
+
+The conditions applied are five: 
+
+1. startHour is zero AND startMinute goes from one to fifty nine, in other words 00:01-00:59
+2. startHour is greater and equal than one and lower and equal than seven AND startMinute goes from zero to fifty nine, in other words 01:00-07:59
+3. startHour is equal to eight and startMinute is equal to zero, in other words 08:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour for example: 08:01-09:00 will be less than an hour and 9:00 is the limit for the first schedule range.
+4.   
+(startHour[i] == 0) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=1 && startHour[i] <=7) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==8 && startMinute[i]==0)) ) && ( ((closingHour[i] >=1 && closingHour[i] <=8) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 9) && (closingMinute[i] == 0)))
+
 
 obtener un array donde cada elemento represente a un empleado con su respectivo horario,
 usamos split para esto.
