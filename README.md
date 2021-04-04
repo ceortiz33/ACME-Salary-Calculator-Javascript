@@ -282,16 +282,16 @@ The variable `employeeSalaryResult` saves the message `The amount to pay to empl
 
 #### deletePattern(textFile="", pattern)
 
-Take a `string` and a `regular expresion` and delete that pattern of the string.
+Take a `string` and a `regular expresion` and delete that pattern of the string. Then the formatted string is returned.
 
 **Parameters**
 
-- `textfile` This is the string that will be processed.
-- `pattern` This is the pattern that will be passed to RegExp() function. The `ig` flags indicate to ignore capitalization and look for all matches. 
+`textfile` This is the string that will be processed.
+`pattern` This is the pattern that will be passed to RegExp() function. The `ig` flags indicate to ignore capitalization and look for all matches. 
 
 **Return value**
  
- Returns the same `string` after applying the filter.
+ Returns the same `string` after erasing the regex pattern passed as input.
 
 ```js
 const deletePattern = (textFile = "", pattern) => {
@@ -301,7 +301,7 @@ const deletePattern = (textFile = "", pattern) => {
 
 #### getHour(schedules="")
 
-obtain the hours part of the schedules parameter
+Return a numeric array with the hours of the schedules string.
 
 ```js
 const getHour = (textFile = "") => {
@@ -315,7 +315,7 @@ const getHour = (textFile = "") => {
 
 **Parameters**
 
-- `schedules` This is the string to be manipulated. Has the form of HH:MM,HH:MM,HH:MM,HH:MM 
+`schedules` This is the string to be manipulated. Has the form of HH:MM,HH:MM,HH:MM,HH:MM 
 
 **Return value**
 
