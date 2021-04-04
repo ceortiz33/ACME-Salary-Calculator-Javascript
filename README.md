@@ -62,5 +62,13 @@ OUTPUT:
 
 The amount to pay ASTRID is: 85 USD
 
-Once you have finished the exercise, please upload the solution to GitHub and send us the link. Don’t forget to include a README.md file. Your README should include an overview of your solution, an explanation of your architecture, an explanation of your approach and methodology and instructions how to run the program locally.
+Once you have finished the exercise, please upload the solution to GitHub and send us the link.OK
+Don’t forget to include a README.md file. Your README should include an overview of your solution, an explanation of your architecture, an explanation of your approach and methodology and instructions how to run the program locally.
+
+I used `FileReader()` API to read the content of the textfile. This file contains the data of the employee and their schedules.
+
+The first thing to do is to get the content of the text file in a variable. The variable reader uses the property `onload` of FileReader
+
+
+
 
