@@ -484,6 +484,95 @@ else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
 06:50-09:00 `startHour` = 6, `closingHour` = 9, `startMinute` = 50, `closingMinute` = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
 
 
+### getSalaryRange(startHour=[],startMinute=[],closingHour=[],closingMinute=[],days=[])
+
+Obtain the salary per hour based on the day and the interval of schedule.
+
+```js
+const getSalaryRange = (startHour=[],startMinute=[],closingHour=[],closingMinute=[],days=[])=>{
+    salaryRangeArray = [];
+    salaryPerHour = 0;
+    
+    for (var i =0; i<days.length; i++){
+
+        const WORKWEEK = (days[i] == "MO" || days[i] == "TU" || days[i] == "WE" || days[i] == "TH" || days[i] == "FR");
+        const WEEKEND = (days[i] == "SA" || days[i] == "SU");
+
+        const ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM = ((((startHour[i] == 0) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=1 && startHour[i] <=7) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==8 && startMinute[i]==0)) ) && ( ((closingHour[i] >=1 && closingHour[i] <=8) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 9) && (closingMinute[i] == 0))));
+        const NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM = ((((startHour[i] == 9) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=10 && startHour[i] <=16) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==17 && startMinute[i]==0)) ) && (((closingHour[i] >=10 && closingHour[i] <=17) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 18) && (closingMinute[i] == 0))));
+        const EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM = ((((startHour[i] == 18) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=19 && startHour[i] <=22) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==23 && startMinute[i]==0))) && (((closingHour[i] >=19 && closingHour[i] <=23) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 0 && closingMinute[i] == 0))));
+        
+        if(WORKWEEK){
+            
+            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+            else if (NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=15); }
+            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=20); }
+        }
+        else if(WEEKEND){
+            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=30); }
+            else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
+            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+        }
+        else{ console.log(`Invalid day`); }
+    }
+
+    return salaryRangeArray;
+}
+```
+
+**Parameters**
+
+`closingHour` The numeric array of hours for closingHourAndMinute.
+`startHour` The numeric array of hours for startHourAndMinute.
+`closingMinute` The numeric array of minutes for closingHourAndMinute.
+`startMinute`  The numeric array of minutes for startHourAndMinute.
+`days` The array of strings that have the days MO,TU,WE,TH,FR,SA or SU.
+
+**Return value**
+
+Returns `salaryRangeArray`a numeric array with the amount to pay based on the schedules and the day. 
 
 
+The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case.
 
+**The conditions for first schedule range 00:01-09:00:** this is represented in **ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM**
+
+CONDITION1: startHour is zero and startMinute goes from one to fifty nine, in other words startHour goes from 00:01 to 00:59
+CONDITION2: startHour is greater and equal than one and lower and equal than seven and startMinute goes from zero to fifty nine, in other words 01:00 to 07:59
+CONDITION3: startHour is equal to eight and startMinute is equal to zero, in other words 08:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour for example: 08:01-09:00 where 9:00 is the limit for the first schedule range.
+CONDITION4: closingHour is greater and equal than one and lower and equal than eight and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 01:00 to 08:59
+CONDITION5: Finally the limit case where closingHour equals to zero and minute is equals to zero, in other words closingHour is equal to 09:00
+
+**The conditions for second schedule range 09:01-18:00:** this is represented in **NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM**
+
+CONDITION1: startHour is nine and startMinute goes from one to fifty nine, in other words startHour goes from 09:01 to 09:59
+CONDITION2: startHour is greater and equal than ten and lower and equal than sixteen and startMinute goes from zero to fifty nine, in other words 10:00 to 16:59
+CONDITION3: startHour is equal to seventeen and startMinute is equal to zero, in other words 17:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
+CONDITION4 closingHour is greater and equal than ten and lower and equal than seventeen and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 10:00 to 17:59
+CONDITION5 Finally the limit case where closingHour equals to eighteen and minute is equals to zero, in other words closingHour is equal to 18:00
+
+**The conditions for third schedule range 18:01-00:00:** this is represented in **EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM**
+
+CONDITION1: startHour is eighteen and startMinute goes from one to fifty nine, in other words startHour goes from 18:01 to 18:59
+CONDITION2: startHour is greater and equal than nineteen and lower and equal than twenty two and startMinute goes from zero to fifty nine, in other words 19:00 to 22:59
+CONDITION3: startHour is equal to twenty three and startMinute is equal to zero, in other words 23:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
+CONDITION4: closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
+CONDITION5: Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
+
+
+The first thing to do is evaluate if is **WORKWEEK=MO||TU||WE||TH||FR** and then assign the proper salaryPerHour. In case the days[i] is equal to any of the **WEEKEND=SA||SU** values applies different salaryPerHour.
+
+
+```js
+   if(WORKWEEK){
+            
+            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+            else if (NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=15); }
+            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=20); }
+        }
+        else if(WEEKEND){
+            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=30); }
+            else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
+            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+        }
+```
