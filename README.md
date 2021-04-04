@@ -286,8 +286,15 @@ Take a `string` and a `regular expresion` and delete that pattern of the string.
 
 **Parameters**
 
-`textfile` This is the string that will be processed.
-`pattern` This is the pattern that will be passed to RegExp() function. The `ig` flags indicate to ignore capitalization and look for all matches. 
+**textfile**
+```
+This is the string that will be processed.
+```
+
+**pattern**
+```
+This is the pattern that will be passed to RegExp() function. The `ig` flags indicate to ignore capitalization and look for all matches. 
+```
 
 **Return value**
  
@@ -610,3 +617,39 @@ The first thing to do is evaluate if day[i] is equal to **WORKWEEK=MO||TU||WE||T
             else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
         }
 ```
+
+### getSalary(hourDifference = [], salaryRange = [])
+
+Returns the sum of all salaries per hour multiply for their respective hour difference
+
+```js
+const getSalary = (hourDifference = [], salaryRange = []) => {
+    let sum = 0;
+    for(var i=0; i< hourDifference.length; i++){
+        sum += (hourDifference[i] * salaryRange[i]);
+    }
+    return sum;
+}
+```
+
+**Parameters**
+
+**hourDifference**
+```
+The numeric array that shows the difference of hours between closingHour and startHour.
+```
+
+**salaryRange**
+```
+The numeric array that shows how much will be paid for an interval of time and day.
+```
+
+**Return value**
+
+Returns `sum`a number with the total wage to be paid to the employee.
+
+
+
+
+
+
