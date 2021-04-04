@@ -79,19 +79,119 @@ Este string se produce luego del `split('=')` donde el primer elemento del array
 
 La operacion se hace en un bucle for por tanto este valor cambio por cada iteracion.
 
-Primera Iteracion:  employees = RENE
-Segunda Iteracion:  employees = ASTRID
-Tercera Iteracion:  employees = CHRIS
-Cuarta Iteracion:   employees = KATHY
-Quinta Iteracion:   employees = RODRIGO
-Sexta Iteracion:    employees = ELENA
+```
+First  Iteration:  employees = RENE
+Second Iteration:  employees = ASTRID
+Third  Iteration:  employees = CHRIS
+Fourth Iteration:  employees = KATHY
+Fifth  Iteration:  employees = RODRIGO
+Sixth  Iteration:  employees = ELENA
+```
 
 ## String schedules
-Este array se produce luego del `split('=')` dando como resultado dos elementos, el segundo elemento corresponde a los horarios.
+Este string se produce luego del `split('=')` donde el segundo elemento del array se almacena en la variable schedules.
 
-## Modifying Schedules Array
+La operacion se hace en un bucle for por tanto este valor cambio por cada iteracion.
 
-Sched
+```
+First  Iteration:  schedules = MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
+Second Iteration:  schedules = MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+Third  Iteration:  schedules = MO08:00-09:00,MO17:00-18:00,TU10:00-17:00,TH10:00-17:00,SA14:00-18:00,SU20:00-21:00
+Fourth Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00,SU20:00-21:00
+Fifth  Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00
+Sixth  Iteration:  schedules = MO05:00-07:00,TU10:00-12:00,SA14:00-18:00,TH10:00-17:00,SU22:00-00:00
+```
+
+## Days Array
+
+Aprovechando que schedule es una cadena podemos aplicar expresiones regulares para mediante un patron filtrar lo que necesitemos. La funcion getPattern toma como parametros un string y un patron, dicho patron lo elimina o lo convierte a un espacio vacio. El patron que se utiliza es `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` al borrar este parametro lo que queda es los dias separados por comas MO,TU,TH,SA,SU. Luego lo convertimos a array usando un split(',')
+
+```
+First  Iteration:  days = ["MO", "TU", "TH", "SA", "SU"]
+Second Iteration:  days = ["MO", "TH", "SU"]
+Third  Iteration:  days = ["MO", "MO", "TU", "TH", "SA", "SU"]
+Fourth Iteration:  days = ["MO", "WE", "FR", "SU"]
+Fifth  Iteration:  days = ["MO", "WE", "FR"]
+Sixth  Iteration:  days = ["MO", "TU", "SA", "TH", "SU"]
+```
+
+## dailySchedule 
+
+Esta variable almacena un string donde se elimina los dias MO,TU,WE,TH,FR,SA,SU  usando la funcion getPattern y la expresion regular `DELETE_DAYS = /[A-Z]/;` que basicamente filtra todas las letras mayusculas.
+
+```
+First  Iteration:  dailySchedule = 10:00-12:00,10:00-12:00,01:00-03:00,14:00-18:00,20:00-21:00
+Second Iteration:  dailySchedule = 10:00-12:00,12:00-14:00,20:00-21:00
+Third  Iteration:  dailySchedule = 08:00-09:00,17:00-18:00,10:00-17:00,10:00-17:00,14:00-18:00,20:00-21:00
+Fourth Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00,20:00-21:00
+Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00
+Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:00,22:00-00:00
+```
+
+## startHourAndMinute
+
+Esta variable toma el primer tramo del horario es decir la parte antes del - , usando la funcion getPattern con la cadena dailySchedule y la expresion regular DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/ como parametros.
+
+```
+First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00 
+Second Iteration:  startHourAndMinute = 10:00,12:00,20:00
+Third  Iteration:  startHourAndMinute = 08:00,17:00,10:00,10:00,14:00,20:00
+Fourth Iteration:  startHourAndMinute = 05:00,19:00,11:00,20:00
+Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
+Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
+```
+
+## closingHourAndMinute
+
+Esta variable toma el segundo tramo del horario es decir la parte despues del - , usando la funcion getPattern con la cadena dailySchedule y la expresion regular DELETE_START_HOUR = /\d{2}:\d{2}-/ como parametros.
+
+```
+First  Iteration:  closinHourAndMinute = 12:00,12:00,03:00,18:00,21:00
+Second Iteration:  closinHourAndMinute = 12:00,14:00,21:00
+Third  Iteration:  closinHourAndMinute = 09:00,18:00,17:00,17:00,18:00,21:00
+Fourth Iteration:  closinHourAndMinute = 08:00,21:00,13:00,21:00
+Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00
+Sixth  Iteration:  closinHourAndMinute = 07:00,12:00,18:00,17:00,00:00
+```
+
+## startHour
+
+Esta variable toma la primera parte de StartHourAndMinute es decir solamente la parte de la hora, para esto hace uso de la funcion getHour que toma como parametro la variable startHourAndMinute y retorna un array de numeros con valores de entre 0 a 23 que representan las horas.
+
+```
+First  Iteration:  startHour = [10, 10, 1, 14, 20]
+Second Iteration:  startHour = [10, 12, 20]
+Third  Iteration:  startHour = [8, 17, 10, 10, 14, 20]
+Fourth Iteration:  startHour = [5, 19, 11, 20]
+Fifth  Iteration:  startHour = [5, 19, 11]
+Sixth  Iteration:  startHour = [5, 10, 14, 10, 22]
+```
+
+## startMinute
+
+Esta variable toma la segunda parte de StartHourAndMinute es decir solamente la parte de los minutos, para esto hace uso de la funcion getMinute que toma como parametro la variable startHourAndMinute y retorna un array de numeros con valores de entre 0 a 59 que representan los minutos.
+
+```
+First  Iteration:  startMinute = [0, 0, 0, 0, 0]
+Second Iteration:  startMinute = [0, 0, 0]
+Third  Iteration:  startMinute = [0, 0, 0, 0, 0, 0]
+Fourth Iteration:  startMinute = [0, 0, 0, 0]
+Fifth  Iteration:  startMinute = [0, 0, 0]
+Sixth  Iteration:  startMinute = [0, 0, 0, 0, 0]
+```
+
+## closingHour
+
+Esta variable toma la primera parte de closingHourAndMinute es decir solamente la parte de la hora, para esto hace uso de la funcion getHour que toma como parametro la variable closingtHourAndMinute y retorna un array de numeros con valores de entre 0 a 23 que representan las horas.
+
+```
+First  Iteration:  closingHour = [12, 12, 3, 18, 21] 
+Second Iteration:  closingHour = [12, 14, 21]
+Third  Iteration:  closingHour = [9, 18, 17, 17, 18, 21]
+Fourth Iteration:  closingHour = [8, 21, 13, 21]
+Fifth  Iteration:  closingHour = [8, 21, 13]
+Sixth  Iteration:  closingHour = [7, 12, 18, 17, 0]
+```
 
 
 
