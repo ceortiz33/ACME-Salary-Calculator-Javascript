@@ -156,7 +156,7 @@ Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00
 Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:00,22:00-00:00
 ```
 
-#### startHourAndMinute
+#### startHourAndMinute (String)
 
 This variable takes the first part of the *dailyschedule*, in other words take the part before `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` as parameters and then return a **string** as result.
 
@@ -169,7 +169,7 @@ Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
 Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
 ```
 
-#### closingHourAndMinute
+#### closingHourAndMinute (String)
 
 This variable takes the second part of the *dailyschedule*, in other words take the part after `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_START_HOUR = /\d{2}:\d{2}-/` as parameters and then return a **string** as result.
 
@@ -182,9 +182,9 @@ Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00
 Sixth  Iteration:  closinHourAndMinute = 07:00,12:00,18:00,17:00,00:00
 ```
 
-## startHour
+#### startHour (Numeric Array)
 
-Esta variable toma la primera parte de StartHourAndMinute es decir solamente la parte de la hora, para esto hace uso de la funcion getHour que toma como parametro la variable startHourAndMinute y retorna un array de numeros con valores de entre 0 a 23 que representan las horas.
+This variable takes the hour of `startHourAndMinute`, in other words the part before `:` . This variable is obtained using `getHour()` with the *string* startHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 23 and represent the hours.
 
 ```
 First  Iteration:  startHour = [10, 10, 1, 14, 20]
@@ -195,9 +195,9 @@ Fifth  Iteration:  startHour = [5, 19, 11]
 Sixth  Iteration:  startHour = [5, 10, 14, 10, 22]
 ```
 
-## startMinute
+#### startMinute (Numeric Array)
 
-Esta variable toma la segunda parte de StartHourAndMinute es decir solamente la parte de los minutos, para esto hace uso de la funcion getMinute que toma como parametro la variable startHourAndMinute y retorna un array de numeros con valores de entre 0 a 59 que representan los minutos.
+This variable takes the minutes of `startHourAndMinute`, in other words the part after `:` . This variable is obtained using `getMinute()` with the *string* startHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 59 and represent the minutes.
 
 ```
 First  Iteration:  startMinute = [0, 0, 0, 0, 0]
@@ -208,9 +208,9 @@ Fifth  Iteration:  startMinute = [0, 0, 0]
 Sixth  Iteration:  startMinute = [0, 0, 0, 0, 0]
 ```
 
-## closingHour
+#### closingHour (Numeric Array)
 
-Esta variable toma la primera parte de closingHourAndMinute es decir solamente la parte de la hora, para esto hace uso de la funcion getHour que toma como parametro la variable closingtHourAndMinute y retorna un array de numeros con valores de entre 0 a 23 que representan las horas.
+This variable takes the hour of `closingHourAndMinute`, in other words the part before `:` . This variable is obtained using `getHour()` with the *string* closingHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 23 and represent the hours. This is the same process as `startHour` considering the other interval of the schedule.
 
 ```
 First  Iteration:  closingHour = [12, 12, 3, 18, 21] 
@@ -221,9 +221,9 @@ Fifth  Iteration:  closingHour = [8, 21, 13]
 Sixth  Iteration:  closingHour = [7, 12, 18, 17, 0]
 ```
 
-## closingMinute
+#### closingMinute (Numeric Array)
 
-Esta variable toma la segunda parte de closingtHourAndMinute es decir solamente la parte de los minutos, para esto hace uso de la funcion getMinute que toma como parametro la variable closingHourAndMinute y retorna un array de numeros con valores de entre 0 a 59 que representan los minutos.
+This variable takes the minutes of `closingHourAndMinute`, in other words the part after `:` . This variable is obtained using `getMinute()` with the *string* closingHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 59 and represent the minutes. This is the same process as `startMinute` considering the other interval of the schedule.
 
 ```
 First  Iteration:  closingMinute = [0, 0, 0, 0, 0]
@@ -234,9 +234,9 @@ Fifth  Iteration:  closingMinute = [0, 0, 0]
 Sixth  Iteration:  closingMinute = [0, 0, 0, 0, 0]
 ```
 
-## hourDifference
+#### hourDifference (Numeric Array)
 
-Obtiene un array que obtiene la resta entre los arreglos closingHour y startHour a traves de la funcion hourSubstraction
+This variable is obtained with the function `hourSubstraction()` that takes the arrays `closingHour` and `startHour` as parameters, applies the substraction and then return an **array of numbers** as the answer.
 
 ```
 First  Iteration:  hourDifference = [2, 2, 2, 4, 1]
@@ -247,9 +247,9 @@ Fifth  Iteration:  hourDifference = [3, 2, 2]
 Sixth  Iteration:  hourDifference = [2, 2, 4, 7, 2]
 ```
 
-## salaryRange
+#### salaryRange (Numeric Array)
 
-Obtiene un array con el valor que se paga por trabajar en cierto horario en cierto dia de la semana.
+This variable is obtained with the function `getSalaryRange()` that takes `startHour`,`startMinute`,`closingHour`,`closingMinute` and `days` as parameters and return an **array** with the specific salary for that schedule range and day.
 
 ```
 First  Iteration:  salaryRange = [15, 15, 25, 20, 25]
