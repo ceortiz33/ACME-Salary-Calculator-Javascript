@@ -49,7 +49,12 @@ OUTPUT:
 The amount to pay ASTRID is: 85 USD
 ```
 
-## Initial Approach
+# Table of Contents
+1. [Initial Approach](#initial_approach)
+2. [Variables](#variables)
+3. [Functions](#functions)
+
+## Initial Approach <a name="initial_approach"></a>
 
 I used Javascript because of the many methods that have to manage strings and arrays, specially the `split` and `toString()` that helps to change between array and string or viceversa depending on the case.`FileReader()` API reads the content of the text file. This API has the property `onload` that save the content of the file, so I used a variable to manipulate that text for later tasks.
 
@@ -97,7 +102,7 @@ The variable `salary` use the function `getSalary` that takes two parameters `ho
 
 Finally I saved the message in an array, give proper format to remove commas and pass it through textarea.value and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
 
-## Variables
+## Variables <a name="variables"></a>
 
 #### employees (string)
 
@@ -273,7 +278,7 @@ Sixth  Iteration:  salary = 315
 The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()` , replace each *comma* with *space* to clear them of the string and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
 
 
-
+## Functions <a name=functions"></a>
 
 
 
