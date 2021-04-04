@@ -104,9 +104,9 @@ Finally I saved the message in an array, give proper format to remove commas and
 
 ## Variables <a name="variables"></a>
 
-#### employees (string)
+#### employees (String)
 
-This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedules` 
+This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedules`. 
 
 ```
 First  Iteration:  employees = RENE
@@ -117,9 +117,9 @@ Fifth  Iteration:  employees = RODRIGO
 Sixth  Iteration:  employees = ELENA
 ```
 
-#### schedules (string)
+#### schedules (String)
 
-This string is obtained after using `split('=')` and save the second parameter of the array `getEmployeesAndSchedules`
+This string is obtained after using `split('=')` and save the second parameter of the array `getEmployeesAndSchedules`.
 
 ```
 First  Iteration:  schedules = MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
@@ -260,9 +260,9 @@ Fifth  Iteration:  salaryRange = [25, 20, 15]
 Sixth  Iteration:  salaryRange = [25, 15, 20, 15, 25]
 ```
 
-## salary
+#### salary (Number)
 
-Esta variable retorna un string con el salario que corresponde a cada usuario, se obtiene multiplicando los elementos de salaryRange y hourDifference con la funcion getSalary
+This variable is obtained multiplying `salaryRange` and `hourDifference` using the function `getSalary()`. This value is **number** and changes in each iteration.
 
 ```
 First  Iteration:  salary = 215
@@ -273,9 +273,9 @@ Fifth  Iteration:  salary = 145
 Sixth  Iteration:  salary = 315
 ```
 
-## Message Management
+#### Message Management
 
-The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()` , replace each *comma* with *space* to clear them of the string and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
+The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()`, replace each *comma* with *space* and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
 
 
 ## Functions <a name="functions"></a>
