@@ -245,6 +245,12 @@ Fifth  Iteration:  salary = 145
 Sixth  Iteration:  salary = 315
 ```
 
+## Message Management
+
+The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()` , replace each *comma* with *space* to clear them of the string and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
+
+
+
 
 
 
