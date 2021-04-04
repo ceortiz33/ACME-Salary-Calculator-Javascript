@@ -441,7 +441,7 @@ if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){
 
 This condition consider every hour except zero hour. Also considerer that the difference is 60 minutes.
 
-```
+```js
 else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
          substraction.push(closingHour[i] - startHour[i])
 }
