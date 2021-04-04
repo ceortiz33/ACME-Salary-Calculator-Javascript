@@ -193,12 +193,57 @@ Fifth  Iteration:  closingHour = [8, 21, 13]
 Sixth  Iteration:  closingHour = [7, 12, 18, 17, 0]
 ```
 
+## closingMinute
 
+Esta variable toma la segunda parte de closingtHourAndMinute es decir solamente la parte de los minutos, para esto hace uso de la funcion getMinute que toma como parametro la variable closingHourAndMinute y retorna un array de numeros con valores de entre 0 a 59 que representan los minutos.
 
+```
+First  Iteration:  closingMinute = [0, 0, 0, 0, 0]
+Second Iteration:  closingMinute = [0, 0, 0]
+Third  Iteration:  closingMinute = [0, 0, 0, 0, 0, 0]
+Fourth Iteration:  closingMinute = [0, 0, 0, 0]
+Fifth  Iteration:  closingMinute = [0, 0, 0]
+Sixth  Iteration:  closingMinute = [0, 0, 0, 0, 0]
+```
 
+## hourDifference
 
+Obtiene un array que obtiene la resta entre los arreglos closingHour y startHour a traves de la funcion hourSubstraction
 
+```
+First  Iteration:  hourDifference = [2, 2, 2, 4, 1]
+Second Iteration:  hourDifference = [2, 2, 1]
+Third  Iteration:  hourDifference = [1, 1, 7, 7, 4, 1]
+Fourth Iteration:  hourDifference = [3, 2, 2, 1]
+Fifth  Iteration:  hourDifference = [3, 2, 2]
+Sixth  Iteration:  hourDifference = [2, 2, 4, 7, 2]
+```
 
+## salaryRange
+
+Obtiene un array con el valor que se paga por trabajar en cierto horario en cierto dia de la semana.
+
+```
+First  Iteration:  salaryRange = [15, 15, 25, 20, 25]
+Second Iteration:  salaryRange = [15, 15, 25]
+Third  Iteration:  salaryRange = [25, 15, 15, 15, 20, 25]
+Fourth Iteration:  salaryRange = [25, 20, 15, 25]
+Fifth  Iteration:  salaryRange = [25, 20, 15]
+Sixth  Iteration:  salaryRange = [25, 15, 20, 15, 25]
+```
+
+## salary
+
+Esta variable retorna un string con el salario que corresponde a cada usuario, se obtiene multiplicando los elementos de salaryRange y hourDifference con la funcion getSalary
+
+```
+First  Iteration:  salary = 215
+Second Iteration:  salary =  85
+Third  Iteration:  salary = 355
+Fourth Iteration:  salary = 170
+Fifth  Iteration:  salary = 145
+Sixth  Iteration:  salary = 315
+```
 
 
 
