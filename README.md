@@ -65,9 +65,15 @@ The amount to pay ASTRID is: 85 USD
 Once you have finished the exercise, please upload the solution to GitHub and send us the link.OK
 Don’t forget to include a README.md file. Your README should include an overview of your solution, an explanation of your architecture, an explanation of your approach and methodology and instructions how to run the program locally.
 
-I used `FileReader()` API to read the content of the textfile. This file contains the data of the employee and their schedules.
+## Initial Approach
 
-The first thing to do is to get the content of the text file in a variable. The variable reader uses the property `onload` of FileReader lo siguiente que hay que hacer es obtener un array donde cada elemento represente a un empleado con su respectivo horario,
+I used Javascript because of the many methods that have to manage strings and arrays, specially the `split` and `toString()` that helps to change between array and string or viceversa depending on the case.`FileReader()` API reads the content of the text file. This API has the property `onload` that save the content of the file, so I used a variable to manipulate that text for later tasks.
+
+First I need to separate each user and their respective schedules so I used a split('\n') and trim() to avoid get caught for errors if users leave a space after the text of each line. Then I used a for loop to manage each line obtained of the previous split in this text file there are six input of employees and their schedules, so this loop will execute six iterations.
+
+Now, to get the name of the employee and the schedules for separate pieces I used `split('=')`. This will genereate an array of two values per iteration, the first value is saved in `employees` and the second in `schedules`.
+
+obtener un array donde cada elemento represente a un empleado con su respectivo horario,
 usamos split para esto.
 
 A continuacion realizamos un bucle for para recorrer cada elemento del array, dentro de ese array tenemos que separar cada campo de la cadena, aqui aprovechandose de expresiones regulares. La cadena tiene un igual que separa dos campos empleados y los horarios, se hace un split nuevamente y almacenamos cada el primer campo en el array employees y el segundo array en schedules.
