@@ -280,7 +280,7 @@ The variable `employeeSalaryResult` saves the message `The amount to pay to empl
 
 ## Functions <a name="functions"></a>
 
-#### deletePattern(textFile="", pattern)
+### deletePattern(textFile="", pattern)
 
 Take a `string` and a `regular expresion` and delete that pattern of the string. Then the formatted string is returned.
 
@@ -299,7 +299,7 @@ const deletePattern = (textFile = "", pattern) => {
 }
 ```
 
-#### getHour(schedules="")
+### getHour(schedules="")
 
 Return a numeric array with the hours of the schedules string.
 
@@ -336,7 +336,9 @@ Array index starts in 0 and then increases. `splice(i+1,1)` will drop the index 
 [10, 10, 1, 14, 20]
 ```
 
-#### getMinutes(schedule="")
+### getMinutes(schedule="")
+
+Return a numeric array with the minutes of the schedules string.
 
 ```
 // get Minutes from format HH:MM
@@ -372,5 +374,115 @@ Array index starts in 0 and then increases. `splice(i,1)` will drop the index 0,
 ```
 [50, 0, 0, 0, 0]
 ```
+
+### hourSubstraction(closingHour = [], startHour= [], closingMinute = [], startMinute = [])
+
+Returns a numeric array with the difference between closingHour and startHour. Also considers that the differnce in minutes is 60 minutes otherwise the difference will be closingHour minus startHour minus one. 
+
+```js
+const hourSubstraction = (closingHour = [], startHour= [], closingMinute = [], startMinute = []) => {
+    substraction = [];
+    if(closingHour.length = startHour.length){
+        for(var i = 0 ; i< closingHour.length; i++){
+            
+                if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){ 
+                    closingHour[i] = 24; //Change to 24 to do substraction properly
+                    substraction.push(closingHour[i] - startHour[i]);
+                    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                }
+                else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
+                    substraction.push(closingHour[i] - startHour[i])
+                }
+                else if(closingHour[i] == 0 && (closingMinute[i] != startMinute[i])){
+                    closingHour[i] = 24; //Change to 24 to do substraction properly
+                    substraction.push(closingHour[i] - startHour[i] - 1);
+                    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                }
+                else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
+                    substraction.push(closingHour[i] - startHour[i] - 1);
+                }
+        }
+        
+        return substraction;
+    }
+}
+```
+
+**Parameters**
+
+`closingHour` The numeric array of hours for closingHourAndMinute.
+`startHour` The numeric array of hours for startHourAndMinute.
+`closingMinute` The numeric array of minutes for closingHourAndMinute.
+`startMinute`  The numeric array of minutes for startHourAndMinute.
+
+**Return value**
+
+Returns a numeric array with the difference of hours between closingHour and startHour. 
+
+**Condition 1**
+
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour
+Also the condition `((closingMinute[i] == startMinute[i]))` will considered that the difference is actually 60 minutes. 
+
+```js
+if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){ 
+    closingHour[i] = 24; //Change to 24 to do substraction properly
+    substraction.push(closingHour[i] - startHour[i]);
+    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+}
+```
+
+Ex:
+23:00-00:00  startHour = 23 , closingHour = 0, startMinute = 0, closingMinute = 0. The difference here is 60 minutes. So the difference of hours should be (24-23) equals one.
+
+
+**Condition 2**
+
+This condition consider every hour except zero hour. Also considerer that the difference is 60 minutes.
+
+```
+else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
+         substraction.push(closingHour[i] - startHour[i])
+}
+
+```
+
+Ex:
+
+08:00-09:00 startHour = 8, closingHour=9, startMinute = 0, closingMinute = 0. The difference here is 60 minutes. So the difference of hours should be (9-8) equals one.
+
+
+**Condition 3**
+
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((closingMinute[i] != startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
+
+```js
+else if(closingHour[i] == 0 && (closingMinute[i] != startMinute[i])){
+       closingHour[i] = 24; //Change to 24 to do substraction properly
+       substraction.push(closingHour[i] - startHour[i] - 1);
+       closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+}
+```
+
+Ex:
+
+22:50-00:00  startHour = 22 , closingHour = 0, startMinute = 50, closingMinute = 50. The difference here is 60 + 50 equals 110 minutes giving an hour and fifty minutes. So the difference of hours should not be (24-22) equals two. The difference should be one, this is achieved substracting by one the actual difference of hours.
+
+**Condition 4**
+
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((closingMinute[i] != startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
+
+```js
+else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
+        substraction.push(closingHour[i] - startHour[i] - 1);
+}
+```
+
+Ex:
+
+06:50-09:00 startHour = 6, closingHour = 9, startMinute = 50, closingMinute = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
+
+
+
 
 
