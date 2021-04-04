@@ -410,10 +410,25 @@ const hourSubstraction = (closingHour = [], startHour= [], closingMinute = [], s
 
 **Parameters**
 
-`closingHour` The numeric array of hours for closingHourAndMinute.
-`startHour` The numeric array of hours for startHourAndMinute.
-`closingMinute` The numeric array of minutes for closingHourAndMinute.
-`startMinute`  The numeric array of minutes for startHourAndMinute.
+**closingHour**
+```
+The numeric array of hours for closingHourAndMinute.
+```
+
+**startHour**
+```
+The numeric array of hours for startHourAndMinute.
+```
+
+**closingMinute**
+```
+The numeric array of minutes for closingHourAndMinute.
+```
+
+**startMinute**
+```
+The numeric array of minutes for startHourAndMinute.
+```
 
 **Return value**
 
@@ -522,11 +537,30 @@ const getSalaryRange = (startHour=[],startMinute=[],closingHour=[],closingMinute
 
 **Parameters**
 
-`closingHour` The numeric array of hours for closingHourAndMinute.
-`startHour` The numeric array of hours for startHourAndMinute.
-`closingMinute` The numeric array of minutes for closingHourAndMinute.
-`startMinute`  The numeric array of minutes for startHourAndMinute.
-`days` The array of strings that have the days MO,TU,WE,TH,FR,SA or SU.
+**closingHour**
+```
+The numeric array of hours for closingHourAndMinute.
+```
+
+**startHour**
+```
+The numeric array of hours for startHourAndMinute.
+```
+
+**closingMinute**
+```
+The numeric array of minutes for closingHourAndMinute.
+```
+
+**startMinute**
+```
+The numeric array of minutes for startHourAndMinute.
+```
+
+**days**
+```
+The array of strings that have the days MO,TU,WE,TH,FR,SA or SU.
+ ```
 
 **Return value**
 
@@ -560,7 +594,7 @@ CONDITION4: closingHour is greater and equal than nineteen and lower and equal t
 CONDITION5: Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
 
 
-The first thing to do is evaluate if is **WORKWEEK=MO||TU||WE||TH||FR** and then assign the proper salaryPerHour. In case the days[i] is equal to any of the **WEEKEND=SA||SU** values applies different salaryPerHour.
+The first thing to do is evaluate if day[i] is equal to **WORKWEEK=MO||TU||WE||TH||FR** and then assign the proper salaryPerHour. In case the days[i] is equal to any of the **WEEKEND=SA||SU** values applies different salaryPerHour.
 
 
 ```js
