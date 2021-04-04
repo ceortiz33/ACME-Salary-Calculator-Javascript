@@ -432,8 +432,9 @@ if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){
 }
 ```
 
-Ex:
-23:00-00:00  startHour = 23 , closingHour = 0, startMinute = 0, closingMinute = 0. The difference here is 60 minutes. So the difference of hours should be (24-23) equals one.
+**Example:**
+
+23:00-00:00  `startHour` = 23 , `closingHour` = 0, `startMinute` = 0, `closingMinute` = 0. The difference here is 60 minutes. So the difference of hours should be (24-23) equals one.
 
 
 **Condition 2**
@@ -447,9 +448,9 @@ else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
 
 ```
 
-Ex:
+**Example:**
 
-08:00-09:00 startHour = 8, closingHour=9, startMinute = 0, closingMinute = 0. The difference here is 60 minutes. So the difference of hours should be (9-8) equals one.
+08:00-09:00 `startHour` = 8, `closingHour` = 9, `startMinute` = 0, `closingMinute` = 0. The difference here is 60 minutes. So the difference of hours should be (9-8) equals one.
 
 
 **Condition 3**
@@ -464,7 +465,7 @@ else if(closingHour[i] == 0 && (closingMinute[i] != startMinute[i])){
 }
 ```
 
-Ex:
+**Example:**
 
 22:50-00:00  startHour = 22 , closingHour = 0, startMinute = 50, closingMinute = 50. The difference here is 60 + 50 equals 110 minutes giving an hour and fifty minutes. So the difference of hours should not be (24-22) equals two. The difference should be one, this is achieved substracting by one the actual difference of hours.
 
@@ -478,9 +479,9 @@ else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
 }
 ```
 
-Ex:
+**Example:**
 
-06:50-09:00 startHour = 6, closingHour = 9, startMinute = 50, closingMinute = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
+06:50-09:00 `startHour` = 6, `closingHour` = 9, `startMinute` = 50, `closingMinute` = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
 
 
 
