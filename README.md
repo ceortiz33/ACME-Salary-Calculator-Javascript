@@ -107,20 +107,16 @@ The conditions for third schedule range 18:01-00:00:
 4. closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
 5. Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
 
+The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case. Then assign the proper value of salary and push that value to an array.
 
+The variable `salary` use the function `getSalary` that takes two parameters `hourDifference` and `salaryRange`. This function multiplies the hour difference with their respective salaryRange and then sum them to get the final value.
 
+Finally I saved the message in an array, give proper format to remove commas and pass it through textarea.value and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
 
-obtener un array donde cada elemento represente a un empleado con su respectivo horario,
-usamos split para esto.
+## Variables
 
-A continuacion realizamos un bucle for para recorrer cada elemento del array, dentro de ese array tenemos que separar cada campo de la cadena, aqui aprovechandose de expresiones regulares. La cadena tiene un igual que separa dos campos empleados y los horarios, se hace un split nuevamente y almacenamos cada el primer campo en el array employees y el segundo array en schedules.
-
-Dejamos de lado por un momento el array employees y nos concentramos en el array schedules. Como siguiente paso hay que obtener el dia y el array de horarios esto lo hacemos usando expresiones regulares. days se obtiene aplicando la funcion  getPattern que toma como parametro una cadena y un patron y lo reemplaza por espacio vacio. Tambien aplicamos un trim() para evitar que posibles caracteres como espacios se tomen en consideracion en el array days.
-
-## String Employees
-Este string se produce luego del `split('=')` donde el primer elemento del array se almacena en la variable employees.
-
-La operacion se hace en un bucle for por tanto este valor cambio por cada iteracion.
+### Employees
+This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedulesonde` 
 
 ```
 First  Iteration:  employees = RENE
