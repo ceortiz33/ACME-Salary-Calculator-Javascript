@@ -145,7 +145,7 @@ Sixth  Iteration:  days = ["MO", "TU", "SA", "TH", "SU"]
 
 #### dailySchedule (String)
 
-This variable is obtained using `getPattern()` with a *string* and the *regex pattern* `DELETE_DAYS = /[A-Z]/;`. This function will erase all days (MO,TU,WE,TH,FR,SA,SU) of the string and just keep the daily schedules. `getPattern()` returns an **string**.
+This variable is obtained using `getPattern()` with a *string* and the *regex pattern* `DELETE_DAYS = /[A-Z]/;` as parameters then return a **string** as result. This function will erase all days (MO,TU,WE,TH,FR,SA,SU) of the string and just keep the daily schedules.
 
 ```
 First  Iteration:  dailySchedule = 10:00-12:00,10:00-12:00,01:00-03:00,14:00-18:00,20:00-21:00
@@ -156,9 +156,9 @@ Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00
 Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:00,22:00-00:00
 ```
 
-## startHourAndMinute
+#### startHourAndMinute
 
-Esta variable toma el primer tramo del horario es decir la parte antes del - , usando la funcion getPattern con la cadena dailySchedule y la expresion regular DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/ como parametros.
+This variable takes the first part of the *dailyschedule*, in other words take the part before `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` as parameters and then return a **string** as result.
 
 ```
 First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00 
@@ -169,9 +169,9 @@ Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
 Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
 ```
 
-## closingHourAndMinute
+#### closingHourAndMinute
 
-Esta variable toma el segundo tramo del horario es decir la parte despues del - , usando la funcion getPattern con la cadena dailySchedule y la expresion regular DELETE_START_HOUR = /\d{2}:\d{2}-/ como parametros.
+This variable takes the second part of the *dailyschedule*, in other words take the part after `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_START_HOUR = /\d{2}:\d{2}-/` as parameters and then return a **string** as result.
 
 ```
 First  Iteration:  closinHourAndMinute = 12:00,12:00,03:00,18:00,21:00
