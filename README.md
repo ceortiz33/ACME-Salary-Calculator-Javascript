@@ -115,8 +115,9 @@ Finally I saved the message in an array, give proper format to remove commas and
 
 ## Variables
 
-### Employees
-This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedulesonde` 
+#### employees (string)
+
+This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedules` 
 
 ```
 First  Iteration:  employees = RENE
@@ -127,10 +128,9 @@ Fifth  Iteration:  employees = RODRIGO
 Sixth  Iteration:  employees = ELENA
 ```
 
-## String schedules
-Este string se produce luego del `split('=')` donde el segundo elemento del array se almacena en la variable schedules.
+#### schedules (string)
 
-La operacion se hace en un bucle for por tanto este valor cambio por cada iteracion.
+This string is obtained after using `split('=')` and save the second parameter of the array `getEmployeesAndSchedules`
 
 ```
 First  Iteration:  schedules = MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
@@ -141,9 +141,9 @@ Fifth  Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00
 Sixth  Iteration:  schedules = MO05:00-07:00,TU10:00-12:00,SA14:00-18:00,TH10:00-17:00,SU22:00-00:00
 ```
 
-## Days Array
+#### days (Array)
 
-Aprovechando que schedule es una cadena podemos aplicar expresiones regulares para mediante un patron filtrar lo que necesitemos. La funcion getPattern toma como parametros un string y un patron, dicho patron lo elimina o lo convierte a un espacio vacio. El patron que se utiliza es `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` al borrar este parametro lo que queda es los dias separados por comas MO,TU,TH,SA,SU. Luego lo convertimos a array usando un split(',')
+Taking advantage of string schedule, we can apply regex to filter patterns. The function `getPattern()` take two parameters an string and a pattern and then erase that pattern The pattern used is `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` after erasing this pattern the result are the days separated by commas MO,TU,TH,SA,SU and then we split based on commas to convert it to array Luego lo convertimos a array usando un split(',')
 
 ```
 First  Iteration:  days = ["MO", "TU", "TH", "SA", "SU"]
