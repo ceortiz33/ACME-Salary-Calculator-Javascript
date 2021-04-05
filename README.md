@@ -50,9 +50,27 @@ The amount to pay ASTRID is: 85 USD
 ```
 
 # Table of Contents
-1. [Initial Approach](#initial_approach)
-2. [Variables](#variables)
-3. [Functions](#functions)
+1. [How to run locally?](#local)
+2. [Initial Approach](#initial_approach)
+3. [Variables](#variables)
+4. [Functions](#functions)
+
+## How to run locally?
+
+1. Download [Git](https://git-scm.com/download) 
+
+2. Download the repository
+
+```
+git clone https://github.com/ceortiz33/ACME-Salary-Calculator-Javascript.git
+```
+
+3. Open the folder and double clic `index.html`, Select any browser you want.
+
+4. You can create your custom `input.txt` file if you want, following the rules that are shown in `index.html`. A predefined `input.txt` file is attached in the repository, so you can use it for testing.
+
+5. Upload the `input.txt` and watch the results.
+
 
 ## Initial Approach <a name="initial_approach"></a>
 
