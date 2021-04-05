@@ -1,9 +1,9 @@
 //------------------------- CONSTANTS AND VARIABLES ---------------------------//
 
-const DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;
-const DELETE_DAYS = /[A-Z]/;
-const DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/
-const DELETE_START_HOUR = /\d{2}:\d{2}-/
+const DAILY_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;
+const DAYS = /[A-Z]/;
+const CLOSING_HOUR = /-\d{2}:\d{2}/
+const START_HOUR = /\d{2}:\d{2}-/
 let input= document.querySelector('input');
 let textarea = document.querySelector('textarea');
 let employeeSalaryResult = [];
@@ -11,18 +11,21 @@ let employeeSalaryResult = [];
 
 //--------------------------------- FUNCTIONS ---------------------------------//
 
-// get a pattern and replace it with ""
-const getPattern = (textFile = "", pattern) => {
+// delete a pattern: get a pattern and replace it with ""
+const deletePattern = (textFile = "", pattern) => {
     return textFile.replace(new RegExp(pattern,"ig"),"");
 }
 
 // get Hour from format HH:MM
-const getHour = (textFile = "") => {
-    textFile = textFile.split(/[:,]/);
-    for (var i = 0; i < textFile.length; i++){
-        textFile.splice(i + 1, 1);
-    } 
-    return textFile.map(Number);
+const getHour = (schedules = "") => {
+    schedules = schedules.split(/[:,]/);
+    
+    for (var i = 0; i < schedules.length; i++){
+        schedules.splice(i + 1, 1);
+    }
+    //eliminar la parte impar
+    
+    return schedules.map(Number);
 }
 
 // get Minutes from format HH:MM
@@ -31,24 +34,34 @@ const getMinutes = (textFile = "") => {
     for(var i = 0; i < textFile.length; i++){
         textFile.splice(i,1);
     }
+    //elimina la parte par
     return textFile.map(Number);
 }
 
 // get the number of hours that an employee works
-const hourSubstraction = (closingHour = [], startHour= []) => {
+const hourSubstraction = (closingHour = [], startHour= [], closingMinute = [], startMinute = []) => {
     substraction = [];
     if(closingHour.length = startHour.length){
         for(var i = 0 ; i< closingHour.length; i++){
             
-            if(closingHour[i] == 0){ 
-                closingHour[i] = 24; //Change to 24 to do substraction properly
-                substraction.push(closingHour[i] - startHour[i]);
-                closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-            }
-            else{
-                substraction.push(closingHour[i] - startHour[i])
-            }
+                if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){ 
+                    closingHour[i] = 24; //Change to 24 to do substraction properly
+                    substraction.push(closingHour[i] - startHour[i]);
+                    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                }
+                else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
+                    substraction.push(closingHour[i] - startHour[i])
+                }
+                else if(closingHour[i] == 0 && (closingMinute[i] != startMinute[i])){
+                    closingHour[i] = 24; //Change to 24 to do substraction properly
+                    substraction.push(closingHour[i] - startHour[i] - 1);
+                    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                }
+                else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
+                    substraction.push(closingHour[i] - startHour[i] - 1);
+                }
         }
+        
         return substraction;
     }
 }        
@@ -78,7 +91,7 @@ const getSalaryRange = (startHour=[],startMinute=[],closingHour=[],closingMinute
             else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
             else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
         }
-        else{ console.log(`Invalid day`); }
+        else{ textarea.value="Invalid day"; }
     }
 
     return salaryRangeArray;
@@ -115,25 +128,23 @@ input.addEventListener('change', function (e) {
           getEmployeesAndSchedules = employeeDataToString.split("=");
           employees = getEmployeesAndSchedules[0]; 
           schedules = getEmployeesAndSchedules[1];
-          console.log(employees);
+          
           // Split days array and daily Schedule string
-          workDays = schedules.split(",").toString();
-          days = getPattern(workDays,DELETE_SCHEDULES).trim().split(",");
-          dailySchedule = getPattern(workDays,DELETE_DAYS);
-
+          days = deletePattern(schedules,DAILY_SCHEDULES).trim().split(",");
+          dailySchedules = deletePattern(schedules,DAYS);
+          
           //Split startHourAndMinute and closingHourAndMinute with format HH:MM
-          startHourAndMinute = getPattern(dailySchedule,DELETE_CLOSING_HOUR);
-          closingHourAndMinute = getPattern(dailySchedule,DELETE_START_HOUR);
+          startHourAndMinute = deletePattern(dailySchedules,CLOSING_HOUR);
+          closingHourAndMinute = deletePattern(dailySchedules,START_HOUR);
           
           // Split Hour(HH) and Minute(MM) for Initial and closing Hours
           startHour = getHour(startHourAndMinute);
           startMinute = getMinutes(startHourAndMinute);
           closingHour = getHour(closingHourAndMinute);
           closingMinute = getMinutes(closingHourAndMinute);
-          
+                   
           // Determine the salary based on salaryRange and hourDifference
-          hourDifference = hourSubstraction(closingHour, startHour);
-          console.log(hourDifference);       
+          hourDifference = hourSubstraction(closingHour, startHour, closingMinute, startMinute);
           salaryRange =  getSalaryRange(startHour,startMinute,closingHour,closingMinute,days);
           salary = getSalary(hourDifference,salaryRange);
 
