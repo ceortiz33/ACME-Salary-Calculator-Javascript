@@ -57,13 +57,9 @@ The amount to pay ASTRID is: 85 USD
 
 ## How to run locally?
 
-1. Download [Git](https://git-scm.com/download) 
+1. Download [Git](https://git-scm.com/download).
 
-2. Download the repository
-
-```
-git clone https://github.com/ceortiz33/ACME-Salary-Calculator-Javascript.git
-```
+2. Download the repository `git clone https://github.com/ceortiz33/ACME-Salary-Calculator-Javascript.git`
 
 3. Open the folder and double clic `index.html`, Select any browser you want.
 
