@@ -177,7 +177,7 @@ Finally I saved the message in an array, give proper format to remove commas and
 
 #### DAILY_SCHEDULES
 
-A regular expresions to filter schedules with the form HH:MM-HH:MM. \d means digits and {2} two occurrences.
+A regular expresions to filter schedules with the form HH:MM-HH:MM. \d+ means at least one digit.
 
 #### DAYS
 
