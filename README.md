@@ -291,165 +291,13 @@ Array index starts in 0 and then increases. `splice(i,1)` will drop the index 0,
 [50, 0, 0, 0, 0]
 ```
 
-### hourSubstraction(closingHour = [], startHour= [], closingMinute = [], startMinute = [])
+### Class FormatSalaryCalculator()
 
-Returns a numeric array with the difference between closingHour and startHour. Also considers that the differnce in minutes is 60 minutes otherwise the difference will be closingHour minus startHour minus one. 
+This class contains `hourSubstraction()` , `getSalaryRange()` and `getSalary()` functions.
 
-```js
-const hourSubstraction = (closingHour = [], startHour= [], closingMinute = [], startMinute = []) => {
-    substraction = [];
-    if(closingHour.length = startHour.length){
-        for(var i = 0 ; i< closingHour.length; i++){
-            
-                if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){ 
-                    closingHour[i] = 24; //Change to 24 to do substraction properly
-                    substraction.push(closingHour[i] - startHour[i]);
-                    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-                }
-                else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
-                    substraction.push(closingHour[i] - startHour[i])
-                }
-                else if(closingHour[i] == 0 && (closingMinute[i] != startMinute[i])){
-                    closingHour[i] = 24; //Change to 24 to do substraction properly
-                    substraction.push(closingHour[i] - startHour[i] - 1);
-                    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-                }
-                else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
-                    substraction.push(closingHour[i] - startHour[i] - 1);
-                }
-        }
-        
-        return substraction;
-    }
-}
-```
+### constructor(closingHour=[],startHour=[],closingMinute=[],startMinute=[],days=[])
 
-**Parameters**
-
-**closingHour**
-```
-The numeric array of hours for closingHourAndMinute.
-```
-
-**startHour**
-```
-The numeric array of hours for startHourAndMinute.
-```
-
-**closingMinute**
-```
-The numeric array of minutes for closingHourAndMinute.
-```
-
-**startMinute**
-```
-The numeric array of minutes for startHourAndMinute.
-```
-
-**Return value**
-
-Returns a numeric array with the difference of hours between closingHour and startHour. 
-
-**Condition 1**
-
-This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour
-Also the condition `((closingMinute[i] == startMinute[i]))` will considered that the difference is actually 60 minutes. 
-
-```js
-if(closingHour[i] == 0 && (closingMinute[i] == startMinute[i])){ 
-    closingHour[i] = 24; //Change to 24 to do substraction properly
-    substraction.push(closingHour[i] - startHour[i]);
-    closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-}
-```
-
-**Example:**
-
-23:00-00:00  `startHour` = 23 , `closingHour` = 0, `startMinute` = 0, `closingMinute` = 0. The difference here is 60 minutes. So the difference of hours should be (24-23) equals one.
-
-
-**Condition 2**
-
-This condition consider every hour except zero hour. Also considerer that the difference is 60 minutes.
-
-```js
-else if (closingHour[i] !=0 && (closingMinute[i] == startMinute[i])){
-         substraction.push(closingHour[i] - startHour[i])
-}
-
-```
-
-**Example:**
-
-08:00-09:00 `startHour` = 8, `closingHour` = 9, `startMinute` = 0, `closingMinute` = 0. The difference here is 60 minutes. So the difference of hours should be (9-8) equals one.
-
-
-**Condition 3**
-
-This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((closingMinute[i] != startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
-
-```js
-else if(closingHour[i] == 0 && (closingMinute[i] != startMinute[i])){
-       closingHour[i] = 24; //Change to 24 to do substraction properly
-       substraction.push(closingHour[i] - startHour[i] - 1);
-       closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-}
-```
-
-**Example:**
-
-22:50-00:00  startHour = 22 , closingHour = 0, startMinute = 50, closingMinute = 50. The difference here is 60 + 50 equals 110 minutes giving an hour and fifty minutes. So the difference of hours should not be (24-22) equals two. The difference should be one, this is achieved substracting by one the actual difference of hours.
-
-**Condition 4**
-
-This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((closingMinute[i] != startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
-
-```js
-else if(closingHour[i] !=0 && (closingMinute[i] != startMinute[i])){
-        substraction.push(closingHour[i] - startHour[i] - 1);
-}
-```
-
-**Example:**
-
-06:50-09:00 `startHour` = 6, `closingHour` = 9, `startMinute` = 50, `closingMinute` = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
-
-
-### getSalaryRange(startHour=[],startMinute=[],closingHour=[],closingMinute=[],days=[])
-
-Obtain the salary per hour based on the day and the interval of schedule.
-
-```js
-const getSalaryRange = (startHour=[],startMinute=[],closingHour=[],closingMinute=[],days=[])=>{
-    salaryRangeArray = [];
-    salaryPerHour = 0;
-    
-    for (var i =0; i<days.length; i++){
-
-        const WORKWEEK = (days[i] == "MO" || days[i] == "TU" || days[i] == "WE" || days[i] == "TH" || days[i] == "FR");
-        const WEEKEND = (days[i] == "SA" || days[i] == "SU");
-
-        const ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM = ((((startHour[i] == 0) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=1 && startHour[i] <=7) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==8 && startMinute[i]==0)) ) && ( ((closingHour[i] >=1 && closingHour[i] <=8) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 9) && (closingMinute[i] == 0))));
-        const NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM = ((((startHour[i] == 9) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=10 && startHour[i] <=16) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==17 && startMinute[i]==0)) ) && (((closingHour[i] >=10 && closingHour[i] <=17) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 18) && (closingMinute[i] == 0))));
-        const EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM = ((((startHour[i] == 18) && (startMinute[i] >= 1 && startMinute[i] <=59)) || ((startHour[i] >=19 && startHour[i] <=22) && (startMinute[i] >=0 && startMinute[i] <=59)) || ((startHour[i]==23 && startMinute[i]==0))) && (((closingHour[i] >=19 && closingHour[i] <=23) && (closingMinute[i] >=0 && closingMinute[i] <=59)) || ((closingHour[i] == 0 && closingMinute[i] == 0))));
-        
-        if(WORKWEEK){
-            
-            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
-            else if (NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=15); }
-            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=20); }
-        }
-        else if(WEEKEND){
-            if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=30); }
-            else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
-            else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
-        }
-        else{ console.log(`Invalid day`); }
-    }
-
-    return salaryRangeArray;
-}
-```
+The constructor has two parameters `closingHour`, `startHour`, `closingMinute`, `startMinute`, `days` that will be used on the functions below.
 
 **Parameters**
 
@@ -478,10 +326,168 @@ The numeric array of minutes for startHourAndMinute.
 The array of strings that have the days MO,TU,WE,TH,FR,SA or SU.
  ```
 
+### hourSubstraction()
+
+Returns a numeric array with the difference between closingHour and startHour. Also considers that the differnce in minutes is 60 minutes otherwise the difference will be closingHour minus startHour minus one. 
+
+```js
+hourSubstraction = () => {
+        let substraction = [];
+        if(this.closingHour.length = this.startHour.length){
+            for(var i = 0 ; i< this.closingHour.length; i++){
+              //Difference of minutes is equals to 60
+              if((this.closingMinute[i] == this.startMinute[i])){
+                  if(this.closingHour[i] == 0){ 
+                      this.closingHour[i] = 24; //Change to 24 to do substraction properly
+                      substraction.push(this.closingHour[i] - this.startHour[i]);
+                      this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                  }
+                  else if (this.closingHour[i] !=0){
+                      substraction.push(this.closingHour[i] - this.startHour[i])
+                  }
+              }
+              //Difference of minutes is lower than 60
+              else if((this.closingMinute[i] != this.startMinute[i])){
+
+                  if(this.closingHour[i] == 0){
+                      this.closingHour[i] = 24; //Change to 24 to do substraction properly
+                      substraction.push(this.closingHour[i] - this.startHour[i] - 1);
+                      this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                  }
+                  else if(this.closingHour[i] !=0){
+                      substraction.push(this.closingHour[i] - this.startHour[i] - 1);
+                  }
+              } 
+                
+            }
+            
+            return substraction;
+        }
+    }
+```
+
+**Return value**
+
+Returns a numeric array with the difference of hours between closingHour and startHour. 
+
+**Condition 1**
+
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] == this.startMinute[i]))` will considered that the difference is actually 60 minutes. 
+
+```js
+if((this.closingMinute[i] == this.startMinute[i])){
+         if(this.closingHour[i] == 0){ 
+                 this.closingHour[i] = 24; //Change to 24 to do substraction properly
+                 substraction.push(this.closingHour[i] - this.startHour[i]);
+                 this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+         }
+...                  
+```
+
+**Example:**
+
+23:00-00:00  `this.startHour` = 23 , `this.closingHour` = 0, `this.startMinute` = 0, `this.closingMinute` = 0. The difference here is 60 minutes. So the difference of hours should be (24-23) equals one.
+
+
+**Condition 2**
+
+This condition consider every hour except zero hour. Also considerer that the difference is 60 minutes.
+
+```js
+if((this.closingMinute[i] == this.startMinute[i])){
+                  ...
+                  ...
+                  
+         else if (this.closingHour[i] !=0){
+                 substraction.push(this.closingHour[i] - this.startHour[i])
+         }
+}
+```
+
+**Example:**
+
+08:00-09:00 `this.startHour` = 8, `this.closingHour` = 9, `this.startMinute` = 0, `this.closingMinute` = 0. The difference here is 60 minutes. So the difference of hours should be (9-8) equals one.
+
+
+**Condition 3**
+
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] != this.startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
+
+```js
+else if((this.closingMinute[i] != this.startMinute[i])){
+
+         if(this.closingHour[i] == 0){
+               this.closingHour[i] = 24; //Change to 24 to do substraction properly
+               substraction.push(this.closingHour[i] - this.startHour[i] - 1);
+               this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+         }
+...         
+```
+
+**Example:**
+
+22:50-00:00  `this.startHour` = 22 , `this.closingHour` = 0, `this.startMinute` = 50, `this.closingMinute` = 50. The difference here is 60 + 50 equals 110 minutes giving an hour and fifty minutes. So the difference of hours should not be (24-22) equals two. The difference should be one, this is achieved substracting by one the actual difference of hours.
+
+**Condition 4**
+
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] != this.startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
+
+```js
+else if((this.closingMinute[i] != this.startMinute[i])){
+         ...
+         ...
+                  
+         else if(this.closingHour[i] !=0){
+                substraction.push(this.closingHour[i] - this.startHour[i] - 1);
+         }
+} 
+```
+
+**Example:**
+
+06:50-09:00 `this.startHour` = 6, `this.closingHour` = 9, `this.startMinute` = 50, `this.closingMinute` = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
+
+
+### getSalaryRange()
+
+Obtain the salary per hour based on the day and the interval of schedule.
+
+```js
+getSalaryRange = ()=> {
+        let salaryRangeArray = [],
+            salaryPerHour = 0;
+    
+        for (var i =0; i<this.days.length; i++){
+
+            const WORKWEEK = (this.days[i] == "MO" || this.days[i] == "TU" || this.days[i] == "WE" || this.days[i] == "TH" || this.days[i] == "FR");
+            const WEEKEND = (this.days[i] == "SA" || this.days[i] == "SU");
+
+            const ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM = ((((this.startHour[i] == 0) && (this.startMinute[i] >= 1 && this.startMinute[i] <=59)) || ((this.startHour[i] >=1 && this.startHour[i] <=7) && (this.startMinute[i] >=0 && this.startMinute[i] <=59)) || ((this.startHour[i]==8 && this.startMinute[i]==0)) ) && ( ((this.closingHour[i] >=1 && this.closingHour[i] <=8) && (this.closingMinute[i] >=0 && this.closingMinute[i] <=59)) || ((this.closingHour[i] == 9) && (this.closingMinute[i] == 0))));
+            const NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM = ((((this.startHour[i] == 9) && (this.startMinute[i] >= 1 && this.startMinute[i] <=59)) || ((this.startHour[i] >=10 && this.startHour[i] <=16) && (this.startMinute[i] >=0 && this.startMinute[i] <=59)) || ((this.startHour[i]==17 && this.startMinute[i]==0)) ) && (((this.closingHour[i] >=10 && this.closingHour[i] <=17) && (this.closingMinute[i] >=0 && this.closingMinute[i] <=59)) || ((this.closingHour[i] == 18) && (this.closingMinute[i] == 0))));
+            const EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM = ((((this.startHour[i] == 18) && (this.startMinute[i] >= 1 && this.startMinute[i] <=59)) || ((this.startHour[i] >=19 && this.startHour[i] <=22) && (this.startMinute[i] >=0 && this.startMinute[i] <=59)) || ((this.startHour[i]==23 && this.startMinute[i]==0))) && (((this.closingHour[i] >=19 && this.closingHour[i] <=23) && (this.closingMinute[i] >=0 && this.closingMinute[i] <=59)) || ((this.closingHour[i] == 0 && this.closingMinute[i] == 0))));
+        
+            if(WORKWEEK){           
+                if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+                else if (NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=15); }
+                else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=20); }
+            }
+            else if(WEEKEND){
+                if(ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=30); }
+                else if(NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM){ salaryRangeArray.push(salaryPerHour=20); }
+                else if(EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM){ salaryRangeArray.push(salaryPerHour=25); }
+            }
+            else{console.log("Invalid") }
+        }
+        
+        return salaryRangeArray;
+    }
+```
+
+
+
 **Return value**
 
 Returns `salaryRangeArray`a numeric array with the amount to pay based on the schedules and the day. 
-
 
 The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case.
 
@@ -509,8 +515,7 @@ CONDITION3: startHour is equal to twenty three and startMinute is equal to zero,
 CONDITION4: closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
 CONDITION5: Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
 
-
-The first thing to do is evaluate if day[i] is equal to **WORKWEEK=MO||TU||WE||TH||FR** and then assign the proper salaryPerHour. In case the days[i] is equal to any of the **WEEKEND=SA||SU** values applies different salaryPerHour.
+The first thing to do is evaluate if this.day[i] is equal to **WORKWEEK=MO||TU||WE||TH||FR** and then assign the proper salaryPerHour. In case the this.days[i] is equal to any of the **WEEKEND=SA||SU** values applies different salaryPerHour.
 
 
 ```js
@@ -529,16 +534,17 @@ The first thing to do is evaluate if day[i] is equal to **WORKWEEK=MO||TU||WE||T
 
 ### getSalary(hourDifference = [], salaryRange = [])
 
-Returns the sum of all salaries per hour multiply for their respective hour difference
+Returns the sum of all salaries per hour multiply for their respective hour difference.
 
 ```js
-const getSalary = (hourDifference = [], salaryRange = []) => {
-    let sum = 0;
-    for(var i=0; i< hourDifference.length; i++){
-        sum += (hourDifference[i] * salaryRange[i]);
+getSalary = (hourDifference = [], salaryRange=[]) => {
+        let sum = 0;
+    
+        for(var i=0; i< hourDifference.length; i++){
+            sum += (hourDifference[i] * salaryRange[i]);
+        }
+        return sum;
     }
-    return sum;
-}
 ```
 
 **Parameters**
@@ -619,7 +625,7 @@ This variable takes the first part of the *dailyschedule*, in other words take t
 First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00 
 Second Iteration:  startHourAndMinute = 10:00,12:00,20:00
 Third  Iteration:  startHourAndMinute = 08:00,17:00,10:00,10:00,14:00,20:00
-Fourth Iteration:  startHourAndMinute = 05:00,19:00,11:00,20:00
+Fourth Iteration:  startHourAndMinute = 05:23,19:00,11:00,20:00
 Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
 Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
 ```
@@ -632,7 +638,7 @@ This variable takes the second part of the *dailyschedule*, in other words take 
 First  Iteration:  closinHourAndMinute = 12:00,12:00,03:00,18:00,21:00
 Second Iteration:  closinHourAndMinute = 12:00,14:00,21:00
 Third  Iteration:  closinHourAndMinute = 09:00,18:00,17:00,17:00,18:00,21:00
-Fourth Iteration:  closinHourAndMinute = 08:00,21:00,13:00,21:00
+Fourth Iteration:  closinHourAndMinute = 08:23,21:00,13:00,21:00
 Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00
 Sixth  Iteration:  closinHourAndMinute = 07:00,12:00,18:00,17:00,00:00
 ```
@@ -658,7 +664,7 @@ This variable takes the minutes of `startHourAndMinute`, in other words the part
 First  Iteration:  startMinute = [0, 0, 0, 0, 0]
 Second Iteration:  startMinute = [0, 0, 0]
 Third  Iteration:  startMinute = [0, 0, 0, 0, 0, 0]
-Fourth Iteration:  startMinute = [0, 0, 0, 0]
+Fourth Iteration:  startMinute = [23, 0, 0, 0]
 Fifth  Iteration:  startMinute = [0, 0, 0]
 Sixth  Iteration:  startMinute = [0, 0, 0, 0, 0]
 ```
@@ -684,7 +690,7 @@ This variable takes the minutes of `closingHourAndMinute`, in other words the pa
 First  Iteration:  closingMinute = [0, 0, 0, 0, 0]
 Second Iteration:  closingMinute = [0, 0, 0]
 Third  Iteration:  closingMinute = [0, 0, 0, 0, 0, 0]
-Fourth Iteration:  closingMinute = [0, 0, 0, 0]
+Fourth Iteration:  closingMinute = [23, 0, 0, 0]
 Fifth  Iteration:  closingMinute = [0, 0, 0]
 Sixth  Iteration:  closingMinute = [0, 0, 0, 0, 0]
 ```
@@ -732,6 +738,11 @@ Sixth  Iteration:  salary = 315
 
 The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()`, replace each *comma* with *space* and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
 
-
-
-
+```
+The amount to pay to employee RENE is 215 USD
+The amount to pay to employee ASTRID is 85 USD
+The amount to pay to employee CHRIS is 355 USD
+The amount to pay to employee KATHY is 170 USD
+The amount to pay to employee JOHN is 120 USD
+The amount to pay to employee ELENA is 315 USD
+```
