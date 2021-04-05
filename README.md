@@ -5,8 +5,9 @@
 1. [Exercise](#exercise)
 2. [How to run locally?](#local)
 3. [Initial Approach](#initial_approach)
-4. [Variables](#variables)
+4. [Constants](#constants)
 5. [Functions](#functions)
+6. [Variables](#variables)
 
 ## Exercise<a name="exercise"></a>
 
@@ -120,181 +121,35 @@ The variable `salary` use the function `getSalary` that takes two parameters `ho
 
 Finally I saved the message in an array, give proper format to remove commas and pass it through textarea.value and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
 
-## Variables <a name="variables"></a>
+## Constants <a name="constants"></a>
 
-#### employees (String)
+#### DAILY_SCHEDULES
 
-This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedules`. 
+A regular expresions to filter schedules with the form HH:MM-HH:MM. \d means digits and {2} two occurrences.
 
-```
-First  Iteration:  employees = RENE
-Second Iteration:  employees = ASTRID
-Third  Iteration:  employees = CHRIS
-Fourth Iteration:  employees = KATHY
-Fifth  Iteration:  employees = RODRIGO
-Sixth  Iteration:  employees = ELENA
-```
+#### DAYS
 
-#### schedules (String)
+A regular expresion to filter all capital letters in a strings. It is used to filter the days MO,TU,WE,TH,FR,SA,SU
 
-This string is obtained after using `split('=')` and save the second parameter of the array `getEmployeesAndSchedules`.
+#### CLOSING_HOUR
 
-```
-First  Iteration:  schedules = MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
-Second Iteration:  schedules = MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
-Third  Iteration:  schedules = MO08:00-09:00,MO17:00-18:00,TU10:00-17:00,TH10:00-17:00,SA14:00-18:00,SU20:00-21:00
-Fourth Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00,SU20:00-21:00
-Fifth  Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00
-Sixth  Iteration:  schedules = MO05:00-07:00,TU10:00-12:00,SA14:00-18:00,TH10:00-17:00,SU22:00-00:00
-```
+A regular expresion to filter the part after `-` in a format HH:MM-HH:MM
 
-#### days (String Array)
+#### START_HOUR
 
-A String is obtained making use of the function `getPattern()` that take two parameters an *string* and a *regex pattern*. `getPattern()` erase the pattern and replaced it with `""`. The pattern used is `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` ,the result is a *string* of days separated by commas `MO,TU,TH,SA,SU` , the string is split by *commas* and then days variable becomes an **array**.
+A regular expression to filter the part before `-` in a format HH:MM-HH:MM
 
-```
-First  Iteration:  days = ["MO", "TU", "TH", "SA", "SU"]
-Second Iteration:  days = ["MO", "TH", "SU"]
-Third  Iteration:  days = ["MO", "MO", "TU", "TH", "SA", "SU"]
-Fourth Iteration:  days = ["MO", "WE", "FR", "SU"]
-Fifth  Iteration:  days = ["MO", "WE", "FR"]
-Sixth  Iteration:  days = ["MO", "TU", "SA", "TH", "SU"]
-```
+#### input
 
-#### dailySchedule (String)
+A variable to get the input of the DOM for the button.
 
-This variable is obtained using `getPattern()` with a *string* and the *regex pattern* `DELETE_DAYS = /[A-Z]/;` as parameters then return a **string** as result. This function will erase all days (MO,TU,WE,TH,FR,SA,SU) of the string and just keep the daily schedules.
+#### textarea
 
-```
-First  Iteration:  dailySchedule = 10:00-12:00,10:00-12:00,01:00-03:00,14:00-18:00,20:00-21:00
-Second Iteration:  dailySchedule = 10:00-12:00,12:00-14:00,20:00-21:00
-Third  Iteration:  dailySchedule = 08:00-09:00,17:00-18:00,10:00-17:00,10:00-17:00,14:00-18:00,20:00-21:00
-Fourth Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00,20:00-21:00
-Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00
-Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:00,22:00-00:00
-```
+A variable to manipulate the DOM of the textarea
 
-#### startHourAndMinute (String)
+#### employeeSalaryResult
 
-This variable takes the first part of the *dailyschedule*, in other words take the part before `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` as parameters and then return a **string** as result.
-
-```
-First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00 
-Second Iteration:  startHourAndMinute = 10:00,12:00,20:00
-Third  Iteration:  startHourAndMinute = 08:00,17:00,10:00,10:00,14:00,20:00
-Fourth Iteration:  startHourAndMinute = 05:00,19:00,11:00,20:00
-Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
-Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
-```
-
-#### closingHourAndMinute (String)
-
-This variable takes the second part of the *dailyschedule*, in other words take the part after `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_START_HOUR = /\d{2}:\d{2}-/` as parameters and then return a **string** as result.
-
-```
-First  Iteration:  closinHourAndMinute = 12:00,12:00,03:00,18:00,21:00
-Second Iteration:  closinHourAndMinute = 12:00,14:00,21:00
-Third  Iteration:  closinHourAndMinute = 09:00,18:00,17:00,17:00,18:00,21:00
-Fourth Iteration:  closinHourAndMinute = 08:00,21:00,13:00,21:00
-Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00
-Sixth  Iteration:  closinHourAndMinute = 07:00,12:00,18:00,17:00,00:00
-```
-
-#### startHour (Numeric Array)
-
-This variable takes the hour of `startHourAndMinute`, in other words the part before `:` . This variable is obtained using `getHour()` with the *string* startHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 23 and represent the hours.
-
-```
-First  Iteration:  startHour = [10, 10, 1, 14, 20]
-Second Iteration:  startHour = [10, 12, 20]
-Third  Iteration:  startHour = [8, 17, 10, 10, 14, 20]
-Fourth Iteration:  startHour = [5, 19, 11, 20]
-Fifth  Iteration:  startHour = [5, 19, 11]
-Sixth  Iteration:  startHour = [5, 10, 14, 10, 22]
-```
-
-#### startMinute (Numeric Array)
-
-This variable takes the minutes of `startHourAndMinute`, in other words the part after `:` . This variable is obtained using `getMinute()` with the *string* startHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 59 and represent the minutes.
-
-```
-First  Iteration:  startMinute = [0, 0, 0, 0, 0]
-Second Iteration:  startMinute = [0, 0, 0]
-Third  Iteration:  startMinute = [0, 0, 0, 0, 0, 0]
-Fourth Iteration:  startMinute = [0, 0, 0, 0]
-Fifth  Iteration:  startMinute = [0, 0, 0]
-Sixth  Iteration:  startMinute = [0, 0, 0, 0, 0]
-```
-
-#### closingHour (Numeric Array)
-
-This variable takes the hour of `closingHourAndMinute`, in other words the part before `:` . This variable is obtained using `getHour()` with the *string* closingHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 23 and represent the hours. This is the same process as `startHour` considering the other interval of the schedule.
-
-```
-First  Iteration:  closingHour = [12, 12, 3, 18, 21] 
-Second Iteration:  closingHour = [12, 14, 21]
-Third  Iteration:  closingHour = [9, 18, 17, 17, 18, 21]
-Fourth Iteration:  closingHour = [8, 21, 13, 21]
-Fifth  Iteration:  closingHour = [8, 21, 13]
-Sixth  Iteration:  closingHour = [7, 12, 18, 17, 0]
-```
-
-#### closingMinute (Numeric Array)
-
-This variable takes the minutes of `closingHourAndMinute`, in other words the part after `:` . This variable is obtained using `getMinute()` with the *string* closingHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 59 and represent the minutes. This is the same process as `startMinute` considering the other interval of the schedule.
-
-```
-First  Iteration:  closingMinute = [0, 0, 0, 0, 0]
-Second Iteration:  closingMinute = [0, 0, 0]
-Third  Iteration:  closingMinute = [0, 0, 0, 0, 0, 0]
-Fourth Iteration:  closingMinute = [0, 0, 0, 0]
-Fifth  Iteration:  closingMinute = [0, 0, 0]
-Sixth  Iteration:  closingMinute = [0, 0, 0, 0, 0]
-```
-
-#### hourDifference (Numeric Array)
-
-This variable is obtained with the function `hourSubstraction()` that takes the arrays `closingHour` and `startHour` as parameters, applies the substraction and then return an **array of numbers** as the answer.
-
-```
-First  Iteration:  hourDifference = [2, 2, 2, 4, 1]
-Second Iteration:  hourDifference = [2, 2, 1]
-Third  Iteration:  hourDifference = [1, 1, 7, 7, 4, 1]
-Fourth Iteration:  hourDifference = [3, 2, 2, 1]
-Fifth  Iteration:  hourDifference = [3, 2, 2]
-Sixth  Iteration:  hourDifference = [2, 2, 4, 7, 2]
-```
-
-#### salaryRange (Numeric Array)
-
-This variable is obtained with the function `getSalaryRange()` that takes `startHour`,`startMinute`,`closingHour`,`closingMinute` and `days` as parameters and return an **array** with the specific salary for that schedule range and day.
-
-```
-First  Iteration:  salaryRange = [15, 15, 25, 20, 25]
-Second Iteration:  salaryRange = [15, 15, 25]
-Third  Iteration:  salaryRange = [25, 15, 15, 15, 20, 25]
-Fourth Iteration:  salaryRange = [25, 20, 15, 25]
-Fifth  Iteration:  salaryRange = [25, 20, 15]
-Sixth  Iteration:  salaryRange = [25, 15, 20, 15, 25]
-```
-
-#### salary (Number)
-
-This variable is obtained multiplying `salaryRange` and `hourDifference` using the function `getSalary()`. This value is **number** and changes in each iteration.
-
-```
-First  Iteration:  salary = 215
-Second Iteration:  salary =  85
-Third  Iteration:  salary = 355
-Fourth Iteration:  salary = 170
-Fifth  Iteration:  salary = 145
-Sixth  Iteration:  salary = 315
-```
-
-#### Message Management
-
-The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()`, replace each *comma* with *space* and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
-
+A empty array to save the output of the program taking in consideration the user and the amount of salary.
 
 ## Functions <a name="functions"></a>
 
@@ -666,7 +521,180 @@ The numeric array that shows how much will be paid for an interval of time and d
 
 Returns `sum`a number with the total wage to be paid to the employee.
 
+## Variables <a name="variables"></a>
 
+#### employees (String)
+
+This string is obtained after using `split('=')` and save the first parameter of the array `getEmployeesAndSchedules`. 
+
+```
+First  Iteration:  employees = RENE
+Second Iteration:  employees = ASTRID
+Third  Iteration:  employees = CHRIS
+Fourth Iteration:  employees = KATHY
+Fifth  Iteration:  employees = RODRIGO
+Sixth  Iteration:  employees = ELENA
+```
+
+#### schedules (String)
+
+This string is obtained after using `split('=')` and save the second parameter of the array `getEmployeesAndSchedules`.
+
+```
+First  Iteration:  schedules = MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
+Second Iteration:  schedules = MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+Third  Iteration:  schedules = MO08:00-09:00,MO17:00-18:00,TU10:00-17:00,TH10:00-17:00,SA14:00-18:00,SU20:00-21:00
+Fourth Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00,SU20:00-21:00
+Fifth  Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00
+Sixth  Iteration:  schedules = MO05:00-07:00,TU10:00-12:00,SA14:00-18:00,TH10:00-17:00,SU22:00-00:00
+```
+
+#### days (String Array)
+
+A String is obtained making use of the function `getPattern()` that take two parameters an *string* and a *regex pattern*. `getPattern()` erase the pattern and replaced it with `""`. The pattern used is `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;` ,the result is a *string* of days separated by commas `MO,TU,TH,SA,SU` , the string is split by *commas* and then days variable becomes an **array**.
+
+```
+First  Iteration:  days = ["MO", "TU", "TH", "SA", "SU"]
+Second Iteration:  days = ["MO", "TH", "SU"]
+Third  Iteration:  days = ["MO", "MO", "TU", "TH", "SA", "SU"]
+Fourth Iteration:  days = ["MO", "WE", "FR", "SU"]
+Fifth  Iteration:  days = ["MO", "WE", "FR"]
+Sixth  Iteration:  days = ["MO", "TU", "SA", "TH", "SU"]
+```
+
+#### dailySchedule (String)
+
+This variable is obtained using `getPattern()` with a *string* and the *regex pattern* `DELETE_DAYS = /[A-Z]/;` as parameters then return a **string** as result. This function will erase all days (MO,TU,WE,TH,FR,SA,SU) of the string and just keep the daily schedules.
+
+```
+First  Iteration:  dailySchedule = 10:00-12:00,10:00-12:00,01:00-03:00,14:00-18:00,20:00-21:00
+Second Iteration:  dailySchedule = 10:00-12:00,12:00-14:00,20:00-21:00
+Third  Iteration:  dailySchedule = 08:00-09:00,17:00-18:00,10:00-17:00,10:00-17:00,14:00-18:00,20:00-21:00
+Fourth Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00,20:00-21:00
+Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00
+Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:00,22:00-00:00
+```
+
+#### startHourAndMinute (String)
+
+This variable takes the first part of the *dailyschedule*, in other words take the part before `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` as parameters and then return a **string** as result.
+
+```
+First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00 
+Second Iteration:  startHourAndMinute = 10:00,12:00,20:00
+Third  Iteration:  startHourAndMinute = 08:00,17:00,10:00,10:00,14:00,20:00
+Fourth Iteration:  startHourAndMinute = 05:00,19:00,11:00,20:00
+Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
+Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
+```
+
+#### closingHourAndMinute (String)
+
+This variable takes the second part of the *dailyschedule*, in other words take the part after `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_START_HOUR = /\d{2}:\d{2}-/` as parameters and then return a **string** as result.
+
+```
+First  Iteration:  closinHourAndMinute = 12:00,12:00,03:00,18:00,21:00
+Second Iteration:  closinHourAndMinute = 12:00,14:00,21:00
+Third  Iteration:  closinHourAndMinute = 09:00,18:00,17:00,17:00,18:00,21:00
+Fourth Iteration:  closinHourAndMinute = 08:00,21:00,13:00,21:00
+Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00
+Sixth  Iteration:  closinHourAndMinute = 07:00,12:00,18:00,17:00,00:00
+```
+
+#### startHour (Numeric Array)
+
+This variable takes the hour of `startHourAndMinute`, in other words the part before `:` . This variable is obtained using `getHour()` with the *string* startHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 23 and represent the hours.
+
+```
+First  Iteration:  startHour = [10, 10, 1, 14, 20]
+Second Iteration:  startHour = [10, 12, 20]
+Third  Iteration:  startHour = [8, 17, 10, 10, 14, 20]
+Fourth Iteration:  startHour = [5, 19, 11, 20]
+Fifth  Iteration:  startHour = [5, 19, 11]
+Sixth  Iteration:  startHour = [5, 10, 14, 10, 22]
+```
+
+#### startMinute (Numeric Array)
+
+This variable takes the minutes of `startHourAndMinute`, in other words the part after `:` . This variable is obtained using `getMinute()` with the *string* startHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 59 and represent the minutes.
+
+```
+First  Iteration:  startMinute = [0, 0, 0, 0, 0]
+Second Iteration:  startMinute = [0, 0, 0]
+Third  Iteration:  startMinute = [0, 0, 0, 0, 0, 0]
+Fourth Iteration:  startMinute = [0, 0, 0, 0]
+Fifth  Iteration:  startMinute = [0, 0, 0]
+Sixth  Iteration:  startMinute = [0, 0, 0, 0, 0]
+```
+
+#### closingHour (Numeric Array)
+
+This variable takes the hour of `closingHourAndMinute`, in other words the part before `:` . This variable is obtained using `getHour()` with the *string* closingHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 23 and represent the hours. This is the same process as `startHour` considering the other interval of the schedule.
+
+```
+First  Iteration:  closingHour = [12, 12, 3, 18, 21] 
+Second Iteration:  closingHour = [12, 14, 21]
+Third  Iteration:  closingHour = [9, 18, 17, 17, 18, 21]
+Fourth Iteration:  closingHour = [8, 21, 13, 21]
+Fifth  Iteration:  closingHour = [8, 21, 13]
+Sixth  Iteration:  closingHour = [7, 12, 18, 17, 0]
+```
+
+#### closingMinute (Numeric Array)
+
+This variable takes the minutes of `closingHourAndMinute`, in other words the part after `:` . This variable is obtained using `getMinute()` with the *string* closingHourAndMinute as parameter and then return an **array of numbers**. These numbers are between 0 and 59 and represent the minutes. This is the same process as `startMinute` considering the other interval of the schedule.
+
+```
+First  Iteration:  closingMinute = [0, 0, 0, 0, 0]
+Second Iteration:  closingMinute = [0, 0, 0]
+Third  Iteration:  closingMinute = [0, 0, 0, 0, 0, 0]
+Fourth Iteration:  closingMinute = [0, 0, 0, 0]
+Fifth  Iteration:  closingMinute = [0, 0, 0]
+Sixth  Iteration:  closingMinute = [0, 0, 0, 0, 0]
+```
+
+#### hourDifference (Numeric Array)
+
+This variable is obtained with the function `hourSubstraction()` that takes the arrays `closingHour` and `startHour` as parameters, applies the substraction and then return an **array of numbers** as the answer.
+
+```
+First  Iteration:  hourDifference = [2, 2, 2, 4, 1]
+Second Iteration:  hourDifference = [2, 2, 1]
+Third  Iteration:  hourDifference = [1, 1, 7, 7, 4, 1]
+Fourth Iteration:  hourDifference = [3, 2, 2, 1]
+Fifth  Iteration:  hourDifference = [3, 2, 2]
+Sixth  Iteration:  hourDifference = [2, 2, 4, 7, 2]
+```
+
+#### salaryRange (Numeric Array)
+
+This variable is obtained with the function `getSalaryRange()` that takes `startHour`,`startMinute`,`closingHour`,`closingMinute` and `days` as parameters and return an **array** with the specific salary for that schedule range and day.
+
+```
+First  Iteration:  salaryRange = [15, 15, 25, 20, 25]
+Second Iteration:  salaryRange = [15, 15, 25]
+Third  Iteration:  salaryRange = [25, 15, 15, 15, 20, 25]
+Fourth Iteration:  salaryRange = [25, 20, 15, 25]
+Fifth  Iteration:  salaryRange = [25, 20, 15]
+Sixth  Iteration:  salaryRange = [25, 15, 20, 15, 25]
+```
+
+#### salary (Number)
+
+This variable is obtained multiplying `salaryRange` and `hourDifference` using the function `getSalary()`. This value is **number** and changes in each iteration.
+
+```
+First  Iteration:  salary = 215
+Second Iteration:  salary =  85
+Third  Iteration:  salary = 355
+Fourth Iteration:  salary = 170
+Fifth  Iteration:  salary = 145
+Sixth  Iteration:  salary = 315
+```
+
+#### Message Management
+
+The variable `employeeSalaryResult` saves the message `The amount to pay to employee ${employees} is ${salary} USD\n` for each iteration using `push`, then convert to string with `toString()`, replace each *comma* with *space* and save it in **textarea.value**. Finally using the property `readAsText` of FileReader() the content of `textarea.value` is shown in the textarea. 
 
 
 
