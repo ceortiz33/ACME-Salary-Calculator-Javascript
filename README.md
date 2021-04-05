@@ -72,6 +72,56 @@ The amount to pay ASTRID is: 85 USD
 
 5. Upload the `input.txt` and watch the results.
 
+## Arquitecture
+
+The program is structured in three sections:
+
+- constants and global variables.
+- functions.
+- main code.
+
+the writing rules used are:
+
+- constants use All Upper Case and Separated by _ between each word.
+- functions and variables inside the code use camelCase.
+- function declaration uses ECMA Script 6. function declaration use arrow functions
+- Use of descriptive name for functions even if the name is longer.
+- Use descriptive name for variables in the code
+- Change the parameters functions receive to get an idea of what expect to be the input.
+- Write comments only to describe specific actions and help other developers to understand code.
+
+constant section and global variables:
+
+- regex used to delete pattern
+- global variables of DOM of button and textarea
+- array to save the output of the exercise.
+
+function section:
+
+- There are two type of function pattern filter and mathematics operations.
+- mathemathics operations use hour and minutes to get results
+
+Extra validations
+- Zero hour (00:00) is formatted to 24 to get the difference of hours and then change back to 0
+- Minutes are considered in hourSubstraction function to validate that we got 'real' hours. If an user has MO10:50-11:00 the hourSubstraction will be zero because there are not 60 minutes of difference. The operation compare if closingMinute is equals to startMinute then proceeds normally, otherwise the houSubstraction will decrease in one.
+- Use of trim() to avoid spaces be considered in split functions at the end of each input.
+- Hour validation in getSalaryRange() consider the limit values for startHour, in other words 00:01-09:00 will be split in three conditions for startHour. 00:01 to 00:59, 01:00-07:59, 08:00 for first schedule.
+- Hour validation in getSalaryRange() consider the limit values for startHour, in other words 00:01-09:00 will be split in three conditions for startHour. 09:01 to 09:59, 10:00-16:59, 17:00 for second schedule.
+- Hour validation in getSalaryRange() consider the limit values for startHour, in other words 00:01-09:00 will be split in three conditions for startHour. 18:01 to 18:59, 19:00-22:59, 23:00 for third schedule.
+- Hour validation in getSalaryRange for closingHour consider a minimum of one hour of difference between the startHour first limit, so the first case will be 01:00 for first schedule range, 10:00 for the second range and 19:00 for the last range.
+- 8:00,17:00,23:00 are the limit values for startHour because I consider that must be at least one hour of difference between the second schedule limit 09:00,18:00,00:00
+
+The main code structure is:
+- Read file with FileReader()
+- Separate the content in each line.
+- For loop to obtain variables
+- Get employee and schedules
+- Use schedules variable to get startHourAndMinute and closingHourAndMinute
+- Get the Hour and Minute from startHourAndMinute and closingHourAndMinute.
+- Get the difference of hours
+- Get the salary range per day
+- Get the amount to pay to the employee
+- Show results in textarea.
 
 ## Initial Approach <a name="initial_approach"></a>
 
