@@ -78,18 +78,21 @@ The amount to pay ASTRID is: 85 USD
 The program is structured in three sections:
 
 - constants and global variables.
-- functions.
+- functions and classes.
 - main code.
+
+The exercise is solved using POO to create objects that execute functions of the three classes: FormatText,FormatTime and FormatSalaryCalculator. The program flow goes from the raw text obtained from the txt file, then is split and take pieces of the text to get variables, these variables will be used to get more variables until get hours and minutes. Hour and minutes are useful for the mathematics part where the logic of salary assignment is applied.  
 
 The writing rules used are:
 
-- constants use All Upper Case and Separated by _ between each word.
+- constants use UpperCase and SnakeCase between each word.
+- classes use PascalCase.
 - functions and variables inside the code use camelCase.
 - function declaration uses ECMA Script 6. function declaration use arrow functions
 - Use of descriptive name for functions even if the name is longer.
-- Use descriptive name for variables in the code
+- Use descriptive name for variables in the code.
 - Change the parameters functions receive to get an idea of what expect to be the input.
-- Write comments only to describe specific actions and help other developers to understand code.
+- Write comments only to describe specific actions and help other people to understand code.
 
 Constant section and global variables:
 
@@ -97,10 +100,10 @@ Constant section and global variables:
 - global variables of DOM of button and textarea
 - array to save the output of the exercise.
 
-Function section:
+Classes section:
 
-- There are two type of function pattern filter and mathematics operations.
-- mathemathics operations use hour and minutes to get results
+- Classes are separated in three groups classes that format text, classes tha obtain hours and minutes, and classes that do the mathematic logic to solve the problem.
+- mathemathics operations use hour and minutes to get results.
 
 Extra validations
 - Zero hour (00:00) is formatted to 24 to get the difference of hours and then change back to 0
@@ -128,49 +131,47 @@ The main code structure is:
 
 I used Javascript because of the many methods that have to manage strings and arrays, specially the `split` and `toString()` that helps to change between array and string or viceversa depending on the case.`FileReader()` API reads the content of the text file. This API has the property `onload` that save the content of the file, so I used a variable to manipulate that text for later tasks.
 
-First I need to separate each user and their respective schedules so I used a split('\n') and trim() to avoid get caught for errors if users leave a space after the text of each line. Then I used a for loop to manage each line obtained of the previous split in this text file there are six input of employees and their schedules, so this loop will execute six iterations.
+First I need to separate each text line so I used a split('\n') and trim() to avoid get caught for errors if users leave a space after the text of each line. Then I used a for loop to manage each line obtained of the previous split in this text file there are six input of employees and their schedules, so this loop will execute six iterations.
 
 Now, to get the name of the employee and the schedules for separate pieces I used `split('=')`. This will genereate an array of two values per iteration, the first value is saved in `employees` and the second in `schedules`. The variable `employees` will not be used until the end for the final message, the variable of interest for the next steps will be `schedules`.
 
-Next, I used regular expresions to obtain specific variables. The variable `days`is obtained removing the schedules with `getPattern()` function and the regex `DELETE_SCHEDULES = /\d{2}:\d{2}-\d{2}:\d{2}/;`, `days` is used on future steps to analyze the amount will be paid for interval of schedule and work in `workWeek` and `weekends`.The variable `dailySchedule` is `schedules` without the days, this is important because I want to remove capital letters and then manipulate only the schedule ranges.
+Next, I used regular expresions to obtain specific variables. The variable `days`is obtained removing the schedules with `getPattern()` function and the regex `DELETE_SCHEDULES = /\d+:\d+-\d+:\d+/;`, `days` is used on future steps to analyze the amount will be paid for interval of schedule and work in `workWeek` and `weekends`.The variable `dailySchedule` is `schedules` without the days, this is important because I want to remove capital letters and then manipulate only the schedule ranges.
 
-The variable `startHourAndMinute` use `getPattern()` and the regex `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` this will obtain the first part of schedule range, in other words I obtained the value before `-`. This variable is used with the objective to obtain `startHour` and `startMinute`
+The variable `startHourAndMinute` use `getPattern()` and the regex `DELETE_CLOSING_HOUR = /-\d+:\d+/` this will obtain the first part of schedule range, in other words I obtained the value before `-`. This variable is used with the objective to obtain `startHour` and `startMinute`
 
-The variable `closingHourAndMinute` use `getPattern()` and the regex `DELETE_START_HOUR = /\d{2}:\d{2}-/` thiw will obtain the second part of schedule range, in other words I obtained the value after `-`. This variable is used with the objective to obtain `closingHour` and `closingMinute`
+The variable `closingHourAndMinute` use `getPattern()` and the regex `DELETE_START_HOUR = /\d+:\d+-/` thiw will obtain the second part of schedule range, in other words I obtained the value after `-`. This variable is used with the objective to obtain `closingHour` and `closingMinute`
 
 The variables `startHour`, `startMinute`, `closingHour`, `closingMinute` are numeric arrays used for mathematics operations and the salary range operation, with the values of `closingHour` and `startHour` I can determine the difference of hours `hourDifference`.
 
-The `getSalaryRange()` function receives five parameters `startHour`, `startMinute`, `closingHour`, `closingMinute` and `days`, days is compared with const `workWeek` that compares if the value of days[i] is equals to `MO || TU || WE || TH ||FR` and with const `weekEnd` if is equals to `SA || SU`. The schedule range are the same for both const only change the salary paid for that range.
+The `getSalaryRange()` function receives five parameters `startHour`, `startMinute`, `closingHour`, `closingMinute` and `days`, days is compared with const `workWeek` that compares if the value of this.days[i] is equals to `MO || TU || WE || TH ||FR` and const `weekEnd` if is equals to `SA || SU`. The schedule range are the same for both const only change the amount paid per hour for that range. The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case. Then assign the proper value of salary and push that value to an array.
 
-The conditions for first schedule range 00:01-09:00: 
+**The conditions for first schedule range 00:01-09:00:** 
 
-1. startHour is zero and startMinute goes from one to fifty nine, in other words startHour goes from 00:01 to 00:59
-2. startHour is greater and equal than one and lower and equal than seven and startMinute goes from zero to fifty nine, in other words 01:00 to 07:59
-3. startHour is equal to eight and startMinute is equal to zero, in other words 08:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour for example: 08:01-09:00 where 9:00 is the limit for the first schedule range.
-4. closingHour is greater and equal than one and lower and equal than eight and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 01:00 to 08:59
-5. Finally the limit case where closingHour equals to zero and minute is equals to zero, in other words closingHour is equal to 09:00
+CONDITION1: startHour is zero and startMinute goes from one to fifty nine, in other words startHour goes from 00:01 to 00:59
+CONDITION2: startHour is greater and equal than one and lower and equal than seven and startMinute goes from zero to fifty nine, in other words 01:00 to 07:59
+CONDITION3: startHour is equal to eight and startMinute is equal to zero, in other words 08:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour for example: 08:01-09:00 where 9:00 is the limit for the first schedule range.
+CONDITION4: closingHour is greater and equal than one and lower and equal than eight and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 01:00 to 08:59
+CONDITION5 Finally the limit case where closingHour equals to zero and minute is equals to zero, in other words closingHour is equal to 09:00
 
-The conditions for second schedule range 09:01-18:00: 
+**The conditions for second schedule range 09:01-18:00:** 
 
-1. startHour is nine and startMinute goes from one to fifty nine, in other words startHour goes from 09:01 to 09:59
-2. startHour is greater and equal than ten and lower and equal than sixteen and startMinute goes from zero to fifty nine, in other words 10:00 to 16:59
-3. startHour is equal to seventeen and startMinute is equal to zero, in other words 17:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
-4. closingHour is greater and equal than ten and lower and equal than seventeen and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 10:00 to 17:59
-5. Finally the limit case where closingHour equals to eighteen and minute is equals to zero, in other words closingHour is equal to 18:00
+CONDITION1: startHour is nine and startMinute goes from one to fifty nine, in other words startHour goes from 09:01 to 09:59
+CONDITOIN2: startHour is greater and equal than ten and lower and equal than sixteen and startMinute goes from zero to fifty nine, in other words 10:00 to 16:59
+CONDITION3: startHour is equal to seventeen and startMinute is equal to zero, in other words 17:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
+CONDITION4: closingHour is greater and equal than ten and lower and equal than seventeen and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 10:00 to 17:59
+CONDITION5: Finally the limit case where closingHour equals to eighteen and minute is equals to zero, in other words closingHour is equal to 18:00
 
-The conditions for third schedule range 18:01-00:00: 
+**The conditions for third schedule range 18:01-00:00:** 
 
-1. startHour is eighteen and startMinute goes from one to fifty nine, in other words startHour goes from 18:01 to 18:59
-2. startHour is greater and equal than nineteen and lower and equal than twenty two and startMinute goes from zero to fifty nine, in other words 19:00 to 22:59
-3. startHour is equal to twenty three and startMinute is equal to zero, in other words 23:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
-4. closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
-5. Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
-
-The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case. Then assign the proper value of salary and push that value to an array.
+CONDITION1: startHour is eighteen and startMinute goes from one to fifty nine, in other words startHour goes from 18:01 to 18:59
+CONDITION2: startHour is greater and equal than nineteen and lower and equal than twenty two and startMinute goes from zero to fifty nine, in other words 19:00 to 22:59
+CONDITION3: startHour is equal to twenty three and startMinute is equal to zero, in other words 23:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
+CONDITION4: closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
+CONDITION5: Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
 
 The variable `salary` use the function `getSalary` that takes two parameters `hourDifference` and `salaryRange`. This function multiplies the hour difference with their respective salaryRange and then sum them to get the final value.
 
-Finally I saved the message in an array, give proper format to remove commas and pass it through textarea.value and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
+Finally I saved the message in an array, give proper format to remove commas and pass it through `textarea.value` and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
 
 ## Constants and global variables<a name="constants"></a>
 
@@ -202,15 +203,19 @@ A variable to manipulate the DOM of the textarea
 
 A empty array to save the output of the program taking in consideration the user and the amount of salary.
 
-## Functions <a name="functions"></a>
+## Classes and Functions <a name="functions"></a>
 
-### deletePattern(textFile="", pattern)
+### Class FormatText()
 
-Take a `string` and a `regular expresion` and delete that pattern of the string. Then the formatted string is returned.
+This class contains deletePattern function().
+
+### Constructor(text,pattern)
+
+The constructor has two parameters `text` and `patterns` that will be used for `deletePattern` function.
 
 **Parameters**
 
-**textfile**
+**text**
 ```
 This is the string that will be processed.
 ```
@@ -220,33 +225,29 @@ This is the string that will be processed.
 This is the pattern that will be passed to RegExp() function. The `ig` flags indicate to ignore capitalization and look for all matches. 
 ```
 
+### deletePattern()
+
+Take a `string` and a `regular expresion` and delete that pattern of the string. Then the formatted string is returned.
+
 **Return value**
  
  Returns the same `string` after erasing the regex pattern passed as input.
 
-```js
-const deletePattern = (textFile = "", pattern) => {
-    return textFile.replace(new RegExp(pattern,"ig"),"");
-}
-```
+### Class FormatTime()
 
-### getHour(schedules="")
+This class contains `getHour()` and `getMinute()` functions.
 
-Return a numeric array with the hours of the schedules string.
+### constructor(schedules)
 
-```js
-const getHour = (textFile = "") => {
-    textFile = textFile.split(/[:,]/);
-    for (var i = 0; i < textFile.length; i++){
-        textFile.splice(i + 1, 1);
-    } 
-    return textFile.map(Number);
-}
-```
+The constructor has one parameter `schedules` that will be used for `deletePattern` function.
 
 **Parameters**
 
 `schedules` This is the string to be manipulated. Has the form of HH:MM,HH:MM,HH:MM,HH:MM 
+
+### getHour()
+
+Return a numeric array with the hours of the schedules string.
 
 **Return value**
 
@@ -267,25 +268,9 @@ Array index starts in 0 and then increases. `splice(i+1,1)` will drop the index 
 [10, 10, 1, 14, 20]
 ```
 
-### getMinutes(schedule="")
+### getMinutes()
 
 Return a numeric array with the minutes of the schedules string.
-
-```
-// get Minutes from format HH:MM
-const getMinutes = (textFile = "") => {
-    textFile = textFile.split(/[:,]/);
-    for(var i = 0; i < textFile.length; i++){
-        textFile.splice(i,1);
-    }
-    //elimina la parte par
-    return textFile.map(Number);
-}
-```
-
-**Parameters**
-
-`schedules` This is the string to be manipulated. Has the form of HH:MM,HH:MM,HH:MM,HH:MM 
 
 **Return value**
 
