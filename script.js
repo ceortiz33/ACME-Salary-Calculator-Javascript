@@ -1,6 +1,4 @@
 //------------------------- CONSTANTS AND VARIABLES ---------------------------//
-//import {FormatTime, FormatText,SalaryCalculator} from './classes.js';
-
 const DAILY_SCHEDULES = /\d+:\d+-\d+:\d+/;
 const DAYS = /[A-Z]/;
 const CLOSING_HOUR = /-\d+:\d+/
