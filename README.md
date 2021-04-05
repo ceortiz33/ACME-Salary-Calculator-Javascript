@@ -5,7 +5,7 @@
 1. [Exercise](#exercise)
 2. [How to run locally?](#local)
 3. [Initial Approach](#initial_approach)
-4. [Constants](#constants)
+4. [Constants and Global Variables](#constants)
 5. [Functions](#functions)
 6. [Variables](#variables)
 
@@ -121,7 +121,7 @@ The variable `salary` use the function `getSalary` that takes two parameters `ho
 
 Finally I saved the message in an array, give proper format to remove commas and pass it through textarea.value and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
 
-## Constants <a name="constants"></a>
+## Constants and global variables<a name="constants"></a>
 
 #### DAILY_SCHEDULES
 
