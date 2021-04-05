@@ -4,10 +4,11 @@
 
 1. [Exercise](#exercise)
 2. [How to run locally?](#local)
-3. [Initial Approach](#initial_approach)
-4. [Constants and Global Variables](#constants)
-5. [Functions](#functions)
-6. [Variables](#variables)
+3. [Architecture](#architecture)
+4. [Initial Approach](#initial_approach)
+5. [Constants and Global Variables](#constants)
+6. [Functions](#functions)
+7. [Variables](#variables)
 
 ## Exercise<a name="exercise"></a>
 
@@ -72,7 +73,7 @@ The amount to pay ASTRID is: 85 USD
 
 5. Upload the `input.txt` and watch the results.
 
-## Arquitecture
+## Architecture <a name="architecture"></a>
 
 The program is structured in three sections:
 
