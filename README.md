@@ -1,6 +1,14 @@
 # ACME-Salary-Calculator-Javascript
 
-Exercise
+# Table of Contents
+
+1. [Exercise](#exercise)
+2. [How to run locally?](#local)
+3. [Initial Approach](#initial_approach)
+4. [Variables](#variables)
+5. [Functions](#functions)
+
+## Exercise<a name="exercise"></a>
 
 The company ACME offers their employees the flexibility to work the hours they want. They will pay for the hours worked based on the day of the week and time of day, according to the following table:
 
@@ -49,13 +57,9 @@ OUTPUT:
 The amount to pay ASTRID is: 85 USD
 ```
 
-# Table of Contents
-1. [How to run locally?](#local)
-2. [Initial Approach](#initial_approach)
-3. [Variables](#variables)
-4. [Functions](#functions)
 
-## How to run locally?
+
+## How to run locally?<a name="local"></a>
 
 1. Download [Git](https://git-scm.com/download).
 
