@@ -67,8 +67,8 @@ class FormatSalaryCalculator{
         let substraction = [];
         if(this.closingHour.length = this.startHour.length){
             for(var i = 0 ; i< this.closingHour.length; i++){
-            
-              if((this.closingMinute[i] == this.startMinute[i])){//Difference is equals to 60 minutes = 1 hour
+              //Difference of minutes is equals to 60
+              if((this.closingMinute[i] == this.startMinute[i])){
                   if(this.closingHour[i] == 0){ 
                       this.closingHour[i] = 24; //Change to 24 to do substraction properly
                       substraction.push(this.closingHour[i] - this.startHour[i]);
@@ -78,7 +78,8 @@ class FormatSalaryCalculator{
                       substraction.push(this.closingHour[i] - this.startHour[i])
                   }
               }
-              else if((this.closingMinute[i] != this.startMinute[i])){//Difference is lower than 60 minutes
+              //Difference of minutes is lower than 60
+              else if((this.closingMinute[i] != this.startMinute[i])){
 
                   if(this.closingHour[i] == 0){
                       this.closingHour[i] = 24; //Change to 24 to do substraction properly
