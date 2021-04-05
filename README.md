@@ -81,7 +81,7 @@ The program is structured in three sections:
 - functions.
 - main code.
 
-the writing rules used are:
+The writing rules used are:
 
 - constants use All Upper Case and Separated by _ between each word.
 - functions and variables inside the code use camelCase.
@@ -91,13 +91,13 @@ the writing rules used are:
 - Change the parameters functions receive to get an idea of what expect to be the input.
 - Write comments only to describe specific actions and help other developers to understand code.
 
-constant section and global variables:
+Constant section and global variables:
 
 - regex used to delete pattern
 - global variables of DOM of button and textarea
 - array to save the output of the exercise.
 
-function section:
+Function section:
 
 - There are two type of function pattern filter and mathematics operations.
 - mathemathics operations use hour and minutes to get results
