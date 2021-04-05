@@ -7,7 +7,7 @@
 3. [Architecture](#architecture)
 4. [Initial Approach](#initial_approach)
 5. [Constants and Global Variables](#constants)
-6. [Functions](#functions)
+6. [Functions and Classes](#functions)
 7. [Variables](#variables)
 
 ## Exercise<a name="exercise"></a>
@@ -203,6 +203,7 @@ A variable to manipulate the DOM of the textarea
 
 A empty array to save the output of the program taking in consideration the user and the amount of salary.
 
+
 ## Classes and Functions <a name="functions"></a>
 
 ### Class FormatText()
@@ -225,7 +226,9 @@ This is the string that will be processed.
 This is the pattern that will be passed to RegExp() function. The `ig` flags indicate to ignore capitalization and look for all matches. 
 ```
 
-### deletePattern()
+### Functions
+
+#### deletePattern()
 
 Take a `string` and a `regular expresion` and delete that pattern of the string. Then the formatted string is returned.
 
@@ -245,7 +248,9 @@ The constructor has one parameter `schedules` that will be used for `deletePatte
 
 `schedules` This is the string to be manipulated. Has the form of HH:MM,HH:MM,HH:MM,HH:MM 
 
-### getHour()
+### Functions
+
+#### getHour()
 
 Return a numeric array with the hours of the schedules string.
 
@@ -268,7 +273,7 @@ Array index starts in 0 and then increases. `splice(i+1,1)` will drop the index 
 [10, 10, 1, 14, 20]
 ```
 
-### getMinutes()
+#### getMinutes()
 
 Return a numeric array with the minutes of the schedules string.
 
@@ -326,7 +331,9 @@ The numeric array of minutes for startHourAndMinute.
 The array of strings that have the days MO,TU,WE,TH,FR,SA or SU.
  ```
 
-### hourSubstraction()
+### Functions
+
+#### hourSubstraction()
 
 Returns a numeric array with the difference between closingHour and startHour. Also considers that the differnce in minutes is 60 minutes otherwise the difference will be closingHour minus startHour minus one. 
 
@@ -448,7 +455,7 @@ else if((this.closingMinute[i] != this.startMinute[i])){
 06:50-09:00 `this.startHour` = 6, `this.closingHour` = 9, `this.startMinute` = 50, `this.closingMinute` = 0. The difference here is 60 + 60 + 50 equals 170 minutes giving two hours and fifty minutes. So the difference of hours should not be( 9-6) equals three. The difference should be two, this is achieves substracting by one the actual difference of hours.
 
 
-### getSalaryRange()
+#### getSalaryRange()
 
 Obtain the salary per hour based on the day and the interval of schedule.
 
@@ -532,7 +539,7 @@ The first thing to do is evaluate if this.day[i] is equal to **WORKWEEK=MO||TU||
         }
 ```
 
-### getSalary(hourDifference = [], salaryRange = [])
+#### getSalary(hourDifference = [], salaryRange = [])
 
 Returns the sum of all salaries per hour multiply for their respective hour difference.
 
