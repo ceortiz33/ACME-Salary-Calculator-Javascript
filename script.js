@@ -12,13 +12,13 @@ let employeeSalaryResult = [];
 
 //--------------------------------- FUNCTIONS AND CLASSES ---------------------------------//
 
-// delete a pattern: get a pattern and replace it with ""
 class FormatText{
     constructor(text,pattern){
         this.text = text;
         this.pattern = pattern;
     }
 
+    // delete a pattern: get a pattern and replace it with ""
     deletePattern = () => {
         return this.text.replace(new RegExp(this.pattern,"ig"),"");
     }
@@ -68,22 +68,28 @@ class FormatSalaryCalculator{
         if(this.closingHour.length = this.startHour.length){
             for(var i = 0 ; i< this.closingHour.length; i++){
             
-                if(this.closingHour[i] == 0 && (this.closingMinute[i] == this.startMinute[i])){ 
-                    this.closingHour[i] = 24; //Change to 24 to do substraction properly
-                    substraction.push(this.closingHour[i] - this.startHour[i]);
-                    this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-                }
-                else if (this.closingHour[i] !=0 && (this.closingMinute[i] == this.startMinute[i])){
-                    substraction.push(this.closingHour[i] - this.startHour[i])
-                }
-                else if(this.closingHour[i] == 0 && (this.closingMinute[i] != this.startMinute[i])){
-                    this.closingHour[i] = 24; //Change to 24 to do substraction properly
-                    substraction.push(this.closingHour[i] - this.startHour[i] - 1);
-                    this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
-                }
-                else if(this.closingHour[i] !=0 && (this.closingMinute[i] != this.startMinute[i])){
-                    substraction.push(this.closingHour[i] - this.startHour[i] - 1);
-                }
+              if((this.closingMinute[i] == this.startMinute[i])){//Difference is equals to 60 minutes = 1 hour
+                  if(this.closingHour[i] == 0){ 
+                      this.closingHour[i] = 24; //Change to 24 to do substraction properly
+                      substraction.push(this.closingHour[i] - this.startHour[i]);
+                      this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                  }
+                  else if (this.closingHour[i] !=0){
+                      substraction.push(this.closingHour[i] - this.startHour[i])
+                  }
+              }
+              else if((this.closingMinute[i] != this.startMinute[i])){//Difference is lower than 60 minutes
+
+                  if(this.closingHour[i] == 0){
+                      this.closingHour[i] = 24; //Change to 24 to do substraction properly
+                      substraction.push(this.closingHour[i] - this.startHour[i] - 1);
+                      this.closingHour[i] = 0; //change back to zero to achieve the conditions of salary range
+                  }
+                  else if(this.closingHour[i] !=0){
+                      substraction.push(this.closingHour[i] - this.startHour[i] - 1);
+                  }
+              } 
+                
             }
             
             return substraction;
