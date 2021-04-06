@@ -82,7 +82,7 @@ The program is structured in three sections:
 - functions and classes.
 - main code.
 
-The exercise is solved using POO to create objects that execute functions of the three classes: FormatText,FormatTime and FormatSalaryCalculator. The program flow goes from the raw text obtained from the txt file, then is split and take pieces of the text to get variables, these variables will be used to get more variables until get hours and minutes. Hour and minutes are useful for the mathematics part where the logic of salary assignment is applied.  
+The exercise is solved using OOP to create objects that execute functions of the three classes: FormatText,FormatTime and FormatSalaryCalculator. The program flow goes from the raw text obtained from the txt file, then is split and take pieces of the text to get variables, these variables will be used to get more variables until get hours and minutes. Hour and minutes are useful for the mathematics part where the logic of salary assignment is applied.  
 
 The writing rules used are:
 
