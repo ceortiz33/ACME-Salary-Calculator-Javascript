@@ -1,0 +1,23 @@
+{
+  "name": "salary_calculator",
+  "version": "1.0.0",
+  "description": "1. [Exercise](#exercise)\r 2. [How to run locally?](#local)\r 3. [Architecture](#architecture)\r 4. [Initial Approach](#initial_approach)\r 5. [Constants and Global Variables](#constants)\r 6. [Functions](#functions)\r 7. [Variables](#variables)",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceortiz33/ACME-Salary-Calculator-Javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceortiz33/ACME-Salary-Calculator-Javascript/issues"
+  },
+  "homepage": "https://github.com/ceortiz33/ACME-Salary-Calculator-Javascript#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
