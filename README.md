@@ -132,7 +132,7 @@ The main code structure is:
 
 I used Javascript because of the many methods that have to manage strings and arrays, specially the `split` and `toString()` that helps to change between array and string or viceversa depending on the case.`FileReader()` API reads the content of the text file. This API has the property `onload` that save the content of the file, so I used a variable to manipulate that text for later tasks.
 
-First I need to separate each text line so I used a split('\n') and trim() to avoid get caught for errors if users leave a space after the text of each line. Then I used a for loop to manage each line obtained of the previous split in this text file there are six input of employees and their schedules, so this loop will execute six iterations.
+First I need to separate each text line so I used a split('\n') and trim() to avoid get caught for errors if users leave a space after the text of each line. Then I used a for loop to manage each line obtained of the previous split in this text file there are five input of employees and their schedules, so this loop will execute five iterations.
 
 Now, to get the name of the employee and the schedules for separate pieces I used `split('=')`. This will genereate an array of two values per iteration, the first value is saved in `employees` and the second in `schedules`. The variable `employees` will not be used until the end for the final message, the variable of interest for the next steps will be `schedules`.
 
@@ -582,8 +582,7 @@ First  Iteration:  employees = RENE
 Second Iteration:  employees = ASTRID
 Third  Iteration:  employees = CHRIS
 Fourth Iteration:  employees = KATHY
-Fifth  Iteration:  employees = RODRIGO
-Sixth  Iteration:  employees = ELENA
+Fifth  Iteration:  employees = JOHN
 ```
 
 #### schedules (String)
@@ -593,10 +592,10 @@ This string is obtained after using `split('=')` and save the second parameter o
 ```
 First  Iteration:  schedules = MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
 Second Iteration:  schedules = MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
-Third  Iteration:  schedules = MO08:00-09:00,MO17:00-18:00,TU10:00-17:00,TH10:00-17:00,SA14:00-18:00,SU20:00-21:00
-Fourth Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00,SU20:00-21:00
-Fifth  Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00
-Sixth  Iteration:  schedules = MO05:00-07:00,TU10:00-12:00,SA14:00-18:00,TH10:00-17:00,SU22:00-00:00
+Third  Iteration:  schedules = MO08:00-09:00,MO17:00-18:00,TU10:00-17:00,TH10:00-17:00,SU20:00-21:00
+Fourth Iteration:  schedules = MO05:23-08:23,TU19:00-21:00,FR11:00-13:00,SU20:00-21:00
+Fifth  Iteration:  schedules = MO05:00-08:00,WE19:00-21:00,FR11:00-13:00,SU22:00-00:00
+
 ```
 
 #### days (String Array)
@@ -607,9 +606,8 @@ A String is obtained making use of the function `getPattern()` that take two par
 First  Iteration:  days = ["MO", "TU", "TH", "SA", "SU"]
 Second Iteration:  days = ["MO", "TH", "SU"]
 Third  Iteration:  days = ["MO", "MO", "TU", "TH", "SA", "SU"]
-Fourth Iteration:  days = ["MO", "WE", "FR", "SU"]
-Fifth  Iteration:  days = ["MO", "WE", "FR"]
-Sixth  Iteration:  days = ["MO", "TU", "SA", "TH", "SU"]
+Fourth Iteration:  days = ["MO", "TU", "FR", "SU"]
+Fifth  Iteration:  days = ["MO", "WE", "FR","SU"]
 ```
 
 #### dailySchedule (String)
@@ -619,10 +617,9 @@ This variable is obtained using `getPattern()` with a *string* and the *regex pa
 ```
 First  Iteration:  dailySchedule = 10:00-12:00,10:00-12:00,01:00-03:00,14:00-18:00,20:00-21:00
 Second Iteration:  dailySchedule = 10:00-12:00,12:00-14:00,20:00-21:00
-Third  Iteration:  dailySchedule = 08:00-09:00,17:00-18:00,10:00-17:00,10:00-17:00,14:00-18:00,20:00-21:00
-Fourth Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00,20:00-21:00
-Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00
-Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:00,22:00-00:00
+Third  Iteration:  dailySchedule = 08:00-09:00,17:00-18:00,10:00-17:00,10:00-17:00,20:00-21:00
+Fourth Iteration:  dailySchedule = 05:23-08:23,19:00-21:00,11:00-13:00,20:00-21:00
+Fifth  Iteration:  dailySchedule = 05:00-08:00,19:00-21:00,11:00-13:00,22:00-00:00
 ```
 
 #### startHourAndMinute (String)
@@ -630,12 +627,11 @@ Sixth  Iteration:  dailySchedule = 05:00-07:00,10:00-12:00,14:00-18:00,10:00-17:
 This variable takes the first part of the *dailyschedule*, in other words take the part before `-`. This variable is obtained using `getPattern()` with the *string dailySchedule* and the *regex pattern* `DELETE_CLOSING_HOUR = /-\d{2}:\d{2}/` as parameters and then return a **string** as result.
 
 ```
-First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00 
+First  Iteration:  startHourAndMinute = 10:00,10:00,01:00,14:00,20:00
 Second Iteration:  startHourAndMinute = 10:00,12:00,20:00
-Third  Iteration:  startHourAndMinute = 08:00,17:00,10:00,10:00,14:00,20:00
+Third  Iteration:  startHourAndMinute = 08:00,17:00,10:00,10:00,20:00
 Fourth Iteration:  startHourAndMinute = 05:23,19:00,11:00,20:00
-Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00
-Sixth  Iteration:  startHourAndMinute = 05:00,10:00,14:00,10:00,22:00
+Fifth  Iteration:  startHourAndMinute = 05:00,19:00,11:00,22:00
 ```
 
 #### closingHourAndMinute (String)
@@ -645,10 +641,9 @@ This variable takes the second part of the *dailyschedule*, in other words take 
 ```
 First  Iteration:  closinHourAndMinute = 12:00,12:00,03:00,18:00,21:00
 Second Iteration:  closinHourAndMinute = 12:00,14:00,21:00
-Third  Iteration:  closinHourAndMinute = 09:00,18:00,17:00,17:00,18:00,21:00
+Third  Iteration:  closinHourAndMinute = 09:00,18:00,17:00,17:00,21:00
 Fourth Iteration:  closinHourAndMinute = 08:23,21:00,13:00,21:00
-Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00
-Sixth  Iteration:  closinHourAndMinute = 07:00,12:00,18:00,17:00,00:00
+Fifth  Iteration:  closinHourAndMinute = 08:00,21:00,13:00,00:00
 ```
 
 #### startHour (Numeric Array)
@@ -658,10 +653,9 @@ This variable takes the hour of `startHourAndMinute`, in other words the part be
 ```
 First  Iteration:  startHour = [10, 10, 1, 14, 20]
 Second Iteration:  startHour = [10, 12, 20]
-Third  Iteration:  startHour = [8, 17, 10, 10, 14, 20]
+Third  Iteration:  startHour = [8, 17, 10, 10, 20]
 Fourth Iteration:  startHour = [5, 19, 11, 20]
-Fifth  Iteration:  startHour = [5, 19, 11]
-Sixth  Iteration:  startHour = [5, 10, 14, 10, 22]
+Fifth  Iteration:  startHour = [5, 19, 11, 22]
 ```
 
 #### startMinute (Numeric Array)
@@ -673,8 +667,7 @@ First  Iteration:  startMinute = [0, 0, 0, 0, 0]
 Second Iteration:  startMinute = [0, 0, 0]
 Third  Iteration:  startMinute = [0, 0, 0, 0, 0, 0]
 Fourth Iteration:  startMinute = [23, 0, 0, 0]
-Fifth  Iteration:  startMinute = [0, 0, 0]
-Sixth  Iteration:  startMinute = [0, 0, 0, 0, 0]
+Fifth  Iteration:  startMinute = [0, 0, 0, 0]
 ```
 
 #### closingHour (Numeric Array)
@@ -684,10 +677,9 @@ This variable takes the hour of `closingHourAndMinute`, in other words the part 
 ```
 First  Iteration:  closingHour = [12, 12, 3, 18, 21] 
 Second Iteration:  closingHour = [12, 14, 21]
-Third  Iteration:  closingHour = [9, 18, 17, 17, 18, 21]
+Third  Iteration:  closingHour = [9, 18, 17, 17, 21]
 Fourth Iteration:  closingHour = [8, 21, 13, 21]
-Fifth  Iteration:  closingHour = [8, 21, 13]
-Sixth  Iteration:  closingHour = [7, 12, 18, 17, 0]
+Fifth  Iteration:  closingHour = [8, 21, 13, 0]
 ```
 
 #### closingMinute (Numeric Array)
@@ -699,8 +691,7 @@ First  Iteration:  closingMinute = [0, 0, 0, 0, 0]
 Second Iteration:  closingMinute = [0, 0, 0]
 Third  Iteration:  closingMinute = [0, 0, 0, 0, 0, 0]
 Fourth Iteration:  closingMinute = [23, 0, 0, 0]
-Fifth  Iteration:  closingMinute = [0, 0, 0]
-Sixth  Iteration:  closingMinute = [0, 0, 0, 0, 0]
+Fifth  Iteration:  closingMinute = [0, 0, 0, 0]
 ```
 
 #### hourDifference (Numeric Array)
@@ -710,10 +701,9 @@ This variable is obtained with the function `hourSubstraction()` that takes the 
 ```
 First  Iteration:  hourDifference = [2, 2, 2, 4, 1]
 Second Iteration:  hourDifference = [2, 2, 1]
-Third  Iteration:  hourDifference = [1, 1, 7, 7, 4, 1]
+Third  Iteration:  hourDifference = [1, 1, 7, 7, 1]
 Fourth Iteration:  hourDifference = [3, 2, 2, 1]
-Fifth  Iteration:  hourDifference = [3, 2, 2]
-Sixth  Iteration:  hourDifference = [2, 2, 4, 7, 2]
+Fifth  Iteration:  hourDifference = [3, 2, 2, 2]
 ```
 
 #### salaryRange (Numeric Array)
@@ -723,10 +713,9 @@ This variable is obtained with the function `getSalaryRange()` that takes `start
 ```
 First  Iteration:  salaryRange = [15, 15, 25, 20, 25]
 Second Iteration:  salaryRange = [15, 15, 25]
-Third  Iteration:  salaryRange = [25, 15, 15, 15, 20, 25]
+Third  Iteration:  salaryRange = [25, 15, 15, 15, 25]
 Fourth Iteration:  salaryRange = [25, 20, 15, 25]
-Fifth  Iteration:  salaryRange = [25, 20, 15]
-Sixth  Iteration:  salaryRange = [25, 15, 20, 15, 25]
+Fifth  Iteration:  salaryRange = [25, 20, 15, 25]
 ```
 
 #### salary (Number)
@@ -736,10 +725,9 @@ This variable is obtained multiplying `salaryRange` and `hourDifference` using t
 ```
 First  Iteration:  salary = 215
 Second Iteration:  salary =  85
-Third  Iteration:  salary = 355
+Third  Iteration:  salary = 275
 Fourth Iteration:  salary = 170
-Fifth  Iteration:  salary = 145
-Sixth  Iteration:  salary = 315
+Fifth  Iteration:  salary = 195
 ```
 
 #### Message Management
@@ -749,10 +737,9 @@ The variable `employeeSalaryResult` saves the message `The amount to pay to empl
 ```
 The amount to pay to employee RENE is 215 USD
 The amount to pay to employee ASTRID is 85 USD
-The amount to pay to employee CHRIS is 355 USD
+The amount to pay to employee CHRIS is 275 USD
 The amount to pay to employee KATHY is 170 USD
-The amount to pay to employee JOHN is 120 USD
-The amount to pay to employee ELENA is 315 USD
+The amount to pay to employee JOHN is 195 USD
 ```
 
 ## Testing with Jest <a name="testing"></a>
