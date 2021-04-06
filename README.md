@@ -757,16 +757,17 @@ The amount to pay to employee ELENA is 315 USD
 
 ## Testing with Jest <a name="testing"></a>
 
-Jest is library to test the functions and classes in Javascript and other technologies related to Javascript like React. Jest is installed using npm from Node.js
+Jest is library to test functions and classes in Javascript and other technologies related to Javascript like React. Jest is installed using npm that is the package manager of Node.js
 
 ### Software Installed
 
 - Node.js
 - Node.js Extension Pack for Visual Studio Code.
+- Jest library.
 
 ### Steps to Reproduce.
 
-1. Get  Node.js  dependencies in the current project. Then type in console `npm init -y`
+1. Get Node.js dependencies in the current project. Then type in console `npm init -y`
 2. Install **Jest** `npm i --save-dev jest`
 3. Change the content of  `test` in package.json to `jest`
 4. Create a directory for tests the functions.
@@ -779,7 +780,7 @@ Here I create a js file for each class: **formatText.js, formatTime.js, formatSa
 
 Evaluate the behavior of each of the regular expresions defined in the main code and confirm that the value is shown is the same.
 
-```
+```js
 const { test, expect } = require('@jest/globals')
 const FormatText = require ("./formatText")
 
@@ -816,7 +817,7 @@ test('Delete the hours before the - to obtain the closingHourAndMinute variable'
 
 Evaluate that the class formatTime returns a numeric array after passing a string with the format HH:MM.
 
-```
+```js
 const { test, expect } = require("@jest/globals")
 const FormatTime = require ("./formatTime")
 
@@ -837,7 +838,7 @@ test('Get minutes of a string with the format HH:MM', ()=>{
 
 Evaluate the three functions of Class FormatSalaryCalculator: **hourSubstraction(), getSalaryRange(), getSalary(hourDifference, salaryRange)**
 
-```
+```js
 const { test, expect } = require("@jest/globals");
 const FormatSalaryCalculator = require ("./formatSalaryCalculator")
 
