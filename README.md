@@ -9,6 +9,7 @@
 5. [Constants and Global Variables](#constants)
 6. [Functions and Classes](#functions)
 7. [Variables](#variables)
+8. [Testing with Jest](#testing)
 
 ## Exercise<a name="exercise"></a>
 
@@ -753,3 +754,21 @@ The amount to pay to employee KATHY is 170 USD
 The amount to pay to employee JOHN is 120 USD
 The amount to pay to employee ELENA is 315 USD
 ```
+
+## Testing with Jest <a name="testing"></a>
+
+Jest is library to test the functions and classes in Javascript and other technologies related to Javascript like React. Jest is installed using npm from Node.js
+
+### Software Installed
+
+- Node.js
+- Node.js Extension Pack for Visual Studio Code.
+
+### Steps to Reproduce.
+
+1. Get  Node.js  dependencies in the current project. Then type in console `npm init -y`
+2. Install **Jest** `npm i --save-dev jest`
+3. Change the content of  `test` in package.json to `jest`
+4. Create a directory for tests the functions.
+
+**getHour**
