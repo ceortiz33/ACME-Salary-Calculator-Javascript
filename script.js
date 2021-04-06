@@ -179,7 +179,6 @@ input.addEventListener('change',  (e) => {
           salaryCalculator = new FormatSalaryCalculator(closingHour, startHour, closingMinute, startMinute, days);
           hourDifference   = salaryCalculator.hourSubstraction();
           salaryRange      = salaryCalculator.getSalaryRange();
-          console.log(salaryRange);
           salary           = salaryCalculator.getSalary(hourDifference,salaryRange);
 
           // Save output to employeelogdata to display in textarea
