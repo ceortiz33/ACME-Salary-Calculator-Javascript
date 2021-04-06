@@ -754,8 +754,8 @@ Jest is library to test functions and classes in Javascript and other technologi
 
 ### Steps to Reproduce.
 
-1. Open the repository in Viusal Studio Code.
-2. Get Node.js dependencies in the current project. Then type in console `npm install`. Jest is already add in the dependencies in package.json.
+1. Open the repository in Visual Studio Code.
+2. Get Node.js dependencies in the current project. Then type in console `npm install`. Jest is already added in the dependencies in package.json.
 3. Run `npm test` to execute tests.
 
 
