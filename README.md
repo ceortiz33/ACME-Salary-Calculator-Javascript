@@ -754,17 +754,14 @@ Jest is library to test functions and classes in Javascript and other technologi
 
 ### Steps to Reproduce.
 
-1. Get Node.js dependencies in the current project. Then type in console `npm init -y`.
-2. Install **Jest** `npm i --save-dev jest`.
-3. Change the content of  `test` in package.json to `jest`.
-4. Create a directory for tests.
-5. Create files for the functions. 
-6. Create files for testing.
-7. Run `npm test` to evaluate if tests succeed.
+1. Open the repository in Viusal Studio Code.
+2. Get Node.js dependencies in the current project. Then type in console `npm install`. Jest is already add in the dependencies in package.json.
+3. Run `npm test` to execute tests.
+
 
 ### Testing Classes
 
-Here I create a js file for each class: **formatText.js, formatTime.js, formatSalaryCalculator.js**. Testing files have the same name just adding `.test.js` to the name.
+Each js file corresponds to each class: **formatText.js, formatTime.js, formatSalaryCalculator.js**. Testing files have the same name just adding `.test.js` to the name.
 
 #### formatText.test.js
 
