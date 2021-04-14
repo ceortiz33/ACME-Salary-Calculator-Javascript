@@ -502,28 +502,31 @@ Returns `salaryRangeArray`a numeric array with the amount to pay based on the sc
 The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case.
 
 **The conditions for first schedule range 00:01-09:00:** this is represented in **ZERO_HOUR_ONE_MINUTE_TO_NINE_HOUR_ZERO_MINUTE_AM**
-
+```
 CONDITION1: startHour is zero and startMinute goes from one to fifty nine, in other words startHour goes from 00:01 to 00:59
 CONDITION2: startHour is greater and equal than one and lower and equal than seven and startMinute goes from zero to fifty nine, in other words 01:00 to 07:59
 CONDITION3: startHour is equal to eight and startMinute is equal to zero, in other words 08:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour for example: 08:01-09:00 where 9:00 is the limit for the first schedule range.
 CONDITION4: closingHour is greater and equal than one and lower and equal than eight and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 01:00 to 08:59
 CONDITION5: Finally the limit case where closingHour equals to zero and minute is equals to zero, in other words closingHour is equal to 09:00
+```
 
 **The conditions for second schedule range 09:01-18:00:** this is represented in **NINE_HOUR_ONE_MINUTE_TO_EIGHTEEN_HOUR_ZERO_MINUTE_PM**
-
+```
 CONDITION1: startHour is nine and startMinute goes from one to fifty nine, in other words startHour goes from 09:01 to 09:59
 CONDITION2: startHour is greater and equal than ten and lower and equal than sixteen and startMinute goes from zero to fifty nine, in other words 10:00 to 16:59
 CONDITION3: startHour is equal to seventeen and startMinute is equal to zero, in other words 17:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
 CONDITION4 closingHour is greater and equal than ten and lower and equal than seventeen and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 10:00 to 17:59
 CONDITION5 Finally the limit case where closingHour equals to eighteen and minute is equals to zero, in other words closingHour is equal to 18:00
+```
 
 **The conditions for third schedule range 18:01-00:00:** this is represented in **EIGHTEEN_HOUR_ONE_MINUTE_TO_ZERO_HOUR_ZERO_MINUTE_AM**
-
+```
 CONDITION1: startHour is eighteen and startMinute goes from one to fifty nine, in other words startHour goes from 18:01 to 18:59
 CONDITION2: startHour is greater and equal than nineteen and lower and equal than twenty two and startMinute goes from zero to fifty nine, in other words 19:00 to 22:59
 CONDITION3: startHour is equal to twenty three and startMinute is equal to zero, in other words 23:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
 CONDITION4: closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
 CONDITION5: Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
+```
 
 The first thing to do is evaluate if this.day[i] is equal to **WORKWEEK=MO||TU||WE||TH||FR** and then assign the proper salaryPerHour. In case the this.days[i] is equal to any of the **WEEKEND=SA||SU** values applies different salaryPerHour.
 
