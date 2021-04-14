@@ -147,29 +147,31 @@ The variables `startHour`, `startMinute`, `closingHour`, `closingMinute` are num
 The `getSalaryRange()` function receives five parameters `startHour`, `startMinute`, `closingHour`, `closingMinute` and `days`, days is compared with const `workWeek` that compares if the value of this.days[i] is equals to `MO || TU || WE || TH ||FR` and const `weekEnd` if is equals to `SA || SU`. The schedule range are the same for both const only change the amount paid per hour for that range. The format of full condition is (CONDITION1 || CONDITION2 || CONDITION3) && (CONDITION4 || CONDITION5) in each case. Then assign the proper value of salary and push that value to an array.
 
 **The conditions for first schedule range 00:01-09:00:** 
-
+```
 CONDITION1: startHour is zero and startMinute goes from one to fifty nine, in other words startHour goes from 00:01 to 00:59
 CONDITION2: startHour is greater and equal than one and lower and equal than seven and startMinute goes from zero to fifty nine, in other words 01:00 to 07:59
 CONDITION3: startHour is equal to eight and startMinute is equal to zero, in other words 08:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour for example: 08:01-09:00 where 9:00 is the limit for the first schedule range.
 CONDITION4: closingHour is greater and equal than one and lower and equal than eight and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 01:00 to 08:59
 CONDITION5 Finally the limit case where closingHour equals to zero and minute is equals to zero, in other words closingHour is equal to 09:00
+```
 
 **The conditions for second schedule range 09:01-18:00:** 
-
+```
 CONDITION1: startHour is nine and startMinute goes from one to fifty nine, in other words startHour goes from 09:01 to 09:59
 CONDITOIN2: startHour is greater and equal than ten and lower and equal than sixteen and startMinute goes from zero to fifty nine, in other words 10:00 to 16:59
 CONDITION3: startHour is equal to seventeen and startMinute is equal to zero, in other words 17:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
 CONDITION4: closingHour is greater and equal than ten and lower and equal than seventeen and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 10:00 to 17:59
 CONDITION5: Finally the limit case where closingHour equals to eighteen and minute is equals to zero, in other words closingHour is equal to 18:00
+```
 
 **The conditions for third schedule range 18:01-00:00:** 
-
+```
 CONDITION1: startHour is eighteen and startMinute goes from one to fifty nine, in other words startHour goes from 18:01 to 18:59
 CONDITION2: startHour is greater and equal than nineteen and lower and equal than twenty two and startMinute goes from zero to fifty nine, in other words 19:00 to 22:59
 CONDITION3: startHour is equal to twenty three and startMinute is equal to zero, in other words 23:00. This case is separate from the second case because startMinute can only be zero otherwise the time between closingHour and startHour is less than an hour. for example: 17:01-18:00 where 18:00 is the limit for the second schedule range.
 CONDITION4: closingHour is greater and equal than nineteen and lower and equal than twenty three and closingMinute is greater and equal to zero and lower and equals to fifty nine, in other words closingHour goes from 19:00 to 23:59
 CONDITION5: Finally the limit case where closingHour equals to zero AM and minute is equals to zero, in other words closingHour is equal to 00:00
-
+```
 The variable `salary` use the function `getSalary` that takes two parameters `hourDifference` and `salaryRange`. This function multiplies the hour difference with their respective salaryRange and then sum them to get the final value.
 
 Finally I saved the message in an array, give proper format to remove commas and pass it through `textarea.value` and then to `readAsText()` property of FileReader API, this will show the message in the textarea.
