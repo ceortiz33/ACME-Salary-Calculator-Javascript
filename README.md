@@ -401,7 +401,7 @@ if((this.closingMinute[i] == this.startMinute[i])){
 
 **Condition 2**
 
-This condition consider every hour except zero hour. Also considerer that the difference is 60 minutes.
+This condition consider every hour except zero hour. Also consider that the difference is 60 minutes.
 
 ```js
 if((this.closingMinute[i] == this.startMinute[i])){
@@ -421,7 +421,7 @@ if((this.closingMinute[i] == this.startMinute[i])){
 
 **Condition 3**
 
-This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] != this.startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] != this.startMinute[i]))` will consider that the difference is not 60 minutes and reduce the difference of hours by one.
 
 ```js
 else if((this.closingMinute[i] != this.startMinute[i])){
@@ -440,7 +440,7 @@ else if((this.closingMinute[i] != this.startMinute[i])){
 
 **Condition 4**
 
-This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] != this.startMinute[i]))` will considered that the difference is not 60 minutes and reduce the difference of hours by one.
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] != this.startMinute[i]))` will consider that the difference is not 60 minutes and reduce the difference of hours by one.
 
 ```js
 else if((this.closingMinute[i] != this.startMinute[i])){
