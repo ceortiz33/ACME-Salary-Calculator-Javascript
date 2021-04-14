@@ -103,7 +103,7 @@ Constant section and global variables:
 
 Classes section:
 
-- Classes are separated in three groups classes that format text, classes tha obtain hours and minutes, and classes that do the mathematic logic to solve the problem.
+- Classes are separated in three groups classes that format text, classes that obtain hours and minutes, and classes that do the mathematic logic to solve the problem.
 - mathemathics operations use hour and minutes to get results.
 
 Extra validations
