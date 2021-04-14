@@ -382,7 +382,7 @@ Returns a numeric array with the difference of hours between closingHour and sta
 
 **Condition 1**
 
-This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] == this.startMinute[i]))` will considered that the difference is actually 60 minutes. 
+This condition is for the midnight hour. The hour system used don't have 24 to represent midnight we have zero, so this will fix that issue and then substract closingHour and startHour. Also the condition `((this.closingMinute[i] == this.startMinute[i]))` will consider that the difference is actually 60 minutes. 
 
 ```js
 if((this.closingMinute[i] == this.startMinute[i])){
